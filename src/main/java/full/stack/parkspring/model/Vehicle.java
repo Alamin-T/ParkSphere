@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import full.stack.parkspring.model.User;
 
 @Data
 @AllArgsConstructor
@@ -21,4 +22,7 @@ public class Vehicle {
     private VehicleType vehicleType;
     @Enumerated(EnumType.STRING)
     private PowerType powerType;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 }
