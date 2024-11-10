@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="org.example.loginpage.UserHomeController" style="-fx-background-color: #f4f4f4;">
+    <children>
+        <VBox alignment="CENTER" spacing="20" layoutX="50" layoutY="50">
+            <Label fx:id="welcomeLabel" style="-fx-font-size: 24px; -fx-font-family: 'Tw Cen MT'; -fx-text-fill: #333333;"/>
+            <ImageView fx:id="profileImageView" fitHeight="100" fitWidth="100" preserveRatio="true" />
+            <Button fx:id="logoutButton" text="Logout" style="-fx-font-size: 14px; -fx-font-family: 'Tw Cen MT'; -fx-background-color: #0078d7; -fx-text-fill: white;" onAction="#handleLogout"/>
+        </VBox>
+    </children>
+</AnchorPane>
