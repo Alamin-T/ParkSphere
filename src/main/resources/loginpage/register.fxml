@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Polyline?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="535.0" prefWidth="888.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.loginpage.registerController">
+
+    <left>
+        <AnchorPane prefHeight="553.0" prefWidth="310.0" style="-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #7F86FD, #A074FF, #8366FA);" BorderPane.alignment="CENTER">
+            <children>
+                <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="5.0" layoutX="13.0" layoutY="212.0" prefHeight="17.0" prefWidth="274.0" text="Park Sphere" textAlignment="CENTER" textFill="WHITE">
+                    <font>
+                        <Font name="Tw Cen MT Condensed Extra Bold" size="30.0" />
+                    </font>
+                </Label>
+                <Line endX="122.0" layoutX="151.0" layoutY="255.0" startX="-124.0" stroke="WHITE" strokeWidth="2.0" />
+                <Label alignment="CENTER" layoutX="47.0" layoutY="265.0" prefHeight="24.0" prefWidth="207.0" text="we'll look after your ride!" textFill="WHITE">
+                    <font>
+                        <Font name="Tw Cen MT" size="17.0" />
+                    </font>
+                </Label>
+                <Circle fill="#1f93ff00" layoutX="150.0" layoutY="246.0" radius="109.0" stroke="WHITE" strokeType="INSIDE" />
+                <Circle fill="#fff000" layoutX="87.0" layoutY="161.0" radius="18.0" stroke="#fff9e9" strokeType="INSIDE">
+                    <effect>
+                        <InnerShadow blurType="GAUSSIAN" height="41.52" radius="20.9925" width="44.45">
+                            <color>
+                                <Color red="0.43421053886413574" green="0.3966861665248871" blue="0.29349416494369507" />
+                            </color>
+                        </InnerShadow>
+                    </effect>
+                </Circle>
+                <Line endX="247.0" endY="8.414129257202148" fill="#ffffff" layoutX="43.0" layoutY="256.0" startX="-1.0" startY="8.414129257202148" stroke="#ffffff5b" strokeWidth="2.0" />
+                <Label layoutX="56.0" layoutY="485.0" text="Copyright (c). All Rights Reserved" textFill="WHITE" />
+            </children>
+        </AnchorPane>
+    </left>
+    <center>
+        <AnchorPane prefHeight="527.0" prefWidth="588.0" style="-fx-background-color: #fffff;" BorderPane.alignment="CENTER">
+            <children>
+                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="168.0" layoutY="83.0" text="Lets Get You Signed Up!" textAlignment="CENTER" textFill="#8e67f8">
+                    <effect>
+                        <InnerShadow />
+                    </effect>
+                    <font>
+                        <Font name="System Italic" size="25.0" />
+                    </font>
+                </Label>
+                <ImageView fitHeight="29.0" fitWidth="35.0" layoutX="272.0" layoutY="54.0" pickOnBounds="true">
+                    <image>
+
+                    </image>
+                </ImageView>
+                <Label fx:id="invalidLoginMessage" alignment="CENTER" contentDisplay="CENTER" layoutX="162.0" layoutY="137.0" prefHeight="17.0" prefWidth="255.0" textFill="#5a61eb">
+                    <font>
+                        <Font name="Tw Cen MT Italic" size="14.0" />
+                    </font>
+                </Label>
+                <Label layoutX="156.0" layoutY="175.0" text="First Name:">
+                    <font>
+                        <Font name="Tw Cen MT Condensed Extra Bold" size="14.0" />
+                    </font>
+                </Label>
+                <Label layoutX="157.0" layoutY="209.0" text="Last Name:">
+                    <font>
+                        <Font name="Tw Cen MT Condensed Extra Bold" size="14.0" />
+                    </font>
+                </Label>
+                <Label layoutX="183.0" layoutY="243.0" text="Email:">
+                    <font>
+                        <Font name="Tw Cen MT Condensed Extra Bold" size="14.0" />
+                    </font>
+                </Label>
+                <Label layoutX="147.0" layoutY="277.0" text="Date of Birth:">
+                    <font>
+                        <Font name="Tw Cen MT Condensed Extra Bold" size="14.0" />
+                    </font>
+                </Label>
+                <DatePicker fx:id="dateOfBirthField" layoutX="225.0" layoutY="272.0" prefHeight="20.0" prefWidth="164.0" />
+                <Label layoutX="179.0" layoutY="311.0" text="Gender:">
+                    <font>
+                        <Font name="Tw Cen MT Condensed Extra Bold" size="14.0" />
+                    </font>
+                </Label>
+                <RadioButton fx:id="maleRadioButton" layoutX="229.0" layoutY="306.0" mnemonicParsing="false" text="Male">
+                    <font>
+                        <Font name="Tw Cen MT Condensed" size="14.0" />
+                    </font>
+               <toggleGroup>
+                  <ToggleGroup fx:id="group1" />
+               </toggleGroup>
+                </RadioButton>
+                <RadioButton fx:id="femaleRadioButton" layoutX="292.0" layoutY="306.0" mnemonicParsing="false" text="Female" toggleGroup="$group1">
+                    <font>
+                        <Font name="Tw Cen MT Condensed" size="14.0" />
+                    </font>
+                </RadioButton>
+                <Label layoutX="164.0" layoutY="345.0" text="Password:">
+                    <font>
+                        <Font name="Tw Cen MT Condensed Extra Bold" size="14.0" />
+                    </font>
+                </Label>
+                <Label layoutX="117.0" layoutY="379.0" text="Re-Enter Password:">
+                    <font>
+                        <Font name="Tw Cen MT Condensed Extra Bold" size="14.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="firstNameField" layoutX="225.0" layoutY="170.0" prefHeight="25.0" prefWidth="165.0" />
+                <TextField fx:id="lastNameField" layoutX="225.0" layoutY="204.0" prefHeight="20.0" prefWidth="164.0" />
+                <TextField fx:id="emailField" layoutX="225.0" layoutY="238.0" prefHeight="25.0" prefWidth="224.0" />
+                <TextField fx:id="enterPasswordField" layoutX="225.0" layoutY="340.0" prefHeight="25.0" prefWidth="174.0" />
+                <TextField fx:id="reEnterPasswordField" layoutX="225.0" layoutY="377.0" prefHeight="25.0" prefWidth="173.0" />
+                <Button fx:id="registerButton" layoutX="243.0" layoutY="419.0" mnemonicParsing="false" onAction="#setInvalidRegisterMessageOnAction" prefHeight="39.0" prefWidth="110.0" style="-fx-background-color: #8589F1; -fx-background-radius: 8;" text="Register" textAlignment="CENTER" textFill="WHITE">
+                    <font>
+                        <Font name="Tw Cen MT Condensed Extra Bold" size="15.0" />
+                    </font>
+                </Button>
+
+
+            <RadioButton fx:id="otherRadioButton" layoutX="365.0" layoutY="306.0" mnemonicParsing="false" text="Other" toggleGroup="$group1">
+               <font>
+                  <Font name="Tw Cen MT Condensed" size="14.0" />
+               </font>
+            </RadioButton>
+                <Polyline fx:id="cancelButton" fill="#80ff0000" layoutX="85.0" layoutY="73.0" points="-51.0, -25.0, -61.0, -31.0, -51.0, -38.0, -51.0, -38.0" stroke="#8589f1" strokeType="INSIDE" strokeWidth="2.0" />
+            <Label layoutX="17.0" layoutY="29.0" onMouseClicked="#cancelButtonOnAction" onMouseEntered="#onPolylineHover" onMouseExited="#onPolylineExit" prefHeight="25.0" prefWidth="24.0" />
+
+            </children>
+        </AnchorPane>
+    </center>
+</BorderPane>

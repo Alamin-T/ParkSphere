@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Polyline?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="535.0" prefWidth="888.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.loginpage.LoginController">
+   <left>
+      <AnchorPane prefHeight="553.0" prefWidth="310.0" style="-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #7F86FD, #A074FF, #8366FA);" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="5.0" layoutX="13.0" layoutY="212.0" prefHeight="17.0" prefWidth="274.0" text="Park Sphere" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Tw Cen MT Condensed Extra Bold" size="30.0" />
+               </font>
+            </Label>
+            <Line endX="122.0" layoutX="151.0" layoutY="255.0" startX="-124.0" stroke="WHITE" strokeWidth="2.0" />
+            <Label alignment="CENTER" layoutX="47.0" layoutY="265.0" prefHeight="24.0" prefWidth="207.0" text="we'll look after your ride!" textFill="WHITE">
+               <font>
+                  <Font name="Tw Cen MT" size="17.0" />
+               </font>
+            </Label>
+            <Circle fill="#1f93ff00" layoutX="150.0" layoutY="246.0" radius="109.0" stroke="WHITE" strokeType="INSIDE" />
+            <Circle fill="#fff000" layoutX="87.0" layoutY="161.0" radius="18.0" stroke="#fff9e9" strokeType="INSIDE">
+               <effect>
+                  <InnerShadow blurType="GAUSSIAN" height="41.52" radius="20.9925" width="44.45">
+                     <color>
+                        <Color red="0.43421053886413574" green="0.3966861665248871" blue="0.29349416494369507" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Circle>
+            <Line endX="247.0" endY="8.414129257202148" fill="#ffffff" layoutX="43.0" layoutY="256.0" startX="-1.0" startY="8.414129257202148" stroke="#ffffff5b" strokeWidth="2.0" AnchorPane.topAnchor="263.41412925720215" />
+            <Label layoutX="56.0" layoutY="485.0" text="Copyright (c). All Rights Reserved" textFill="WHITE" />
+         </children>
+      </AnchorPane>
+   </left>
+   <center>
+      <AnchorPane prefHeight="527.0" prefWidth="588.0" style="-fx-background-color: #fffff;" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="221.0" layoutY="83.0" text="Secure Login" textFill="#8e67f8">
+               <effect>
+                  <InnerShadow />
+               </effect>
+               <font>
+                  <Font name="System Italic" size="25.0" />
+               </font>
+            </Label>
+            <Label layoutX="101.0" layoutY="187.0" prefHeight="37.0" prefWidth="99.0" text="Username:">
+               <font>
+                  <Font name="Tw Cen MT Condensed Extra Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="101.0" layoutY="240.0" prefHeight="37.0" prefWidth="99.0" text="Password:">
+               <font>
+                  <Font name="Tw Cen MT Condensed Extra Bold" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="usernameTextField" layoutX="201.0" layoutY="193.0" prefHeight="25.0" prefWidth="238.0" promptText="Username" />
+            <Button fx:id="LoginButton" layoutX="234.0" layoutY="318.0" mnemonicParsing="false" onAction="#loadAfterLoginPage" prefHeight="39.0" prefWidth="110.0" style="-fx-background-color: #8589F1; -fx-background-radius: 8;" text="Sign In" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Tw Cen MT Condensed Extra Bold" size="15.0" />
+               </font>
+            </Button>
+            <PasswordField fx:id="passwordTextField" layoutX="200.0" layoutY="246.0" prefHeight="26.0" prefWidth="239.0" promptText="Password" />
+            <Label fx:id="forgotPasswordButton" alignment="CENTER" contentDisplay="CENTER" layoutX="215.0" layoutY="370.0" onMouseClicked="#onLabelClickForgot" onMouseEntered="#onLabelHoverForgot" onMouseExited="#onLabelExitForgot" opacity="0.7" prefHeight="15.0" prefWidth="148.0" style="-fx-underline: #8589F1;" text="forgot password?" textAlignment="CENTER" textFill="#8589f1">
+               <font>
+                  <Font name="Tw Cen MT Italic" size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="registerButton" alignment="CENTER" contentDisplay="CENTER" layoutX="489.0" layoutY="39.0" onMouseClicked="#onLabelClickReg" onMouseEntered="#onLabelHoverReg" onMouseExited="#onLabelExitReg" opacity="0.7" text="Register" textAlignment="CENTER" textFill="#868cf2">
+               <font>
+                  <Font name="Tw Cen MT" size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="invalidLoginMessage" alignment="CENTER" contentDisplay="CENTER" layoutX="162.0" layoutY="137.0" prefHeight="17.0" prefWidth="255.0" textFill="#5a61eb">
+               <font>
+                  <Font name="Tw Cen MT Italic" size="14.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="28.0" fitWidth="34.0" layoutX="272.0" layoutY="48.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../../../purple_lock.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>
