@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="535.0" prefWidth="888.0" spacing="20" style="-fx-padding: 30; -fx-background-color: #f4f4f9; -fx-border-color: #ccc; -fx-border-radius: 10; -fx-background-radius: 10;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.loginpage.PaymentController">
+<VBox alignment="CENTER" prefHeight="535.0" prefWidth="888.0" spacing="20" style="-fx-padding: 30; -fx-background-color: #f4f4f9; -fx-border-color: #ccc; -fx-border-radius: 10; -fx-background-radius: 10;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="full.stack.parkspring.frontend.PaymentController">
 
     <!-- Title -->
     <Label style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #333;" text="Add Payment Method">

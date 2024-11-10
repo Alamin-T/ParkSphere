@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="1440.0" style="-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #7F86FD, #A074FF, #8366FA);" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.loginpage.afterLoginController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="1440.0" style="-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #7F86FD, #A074FF, #8366FA);" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="full.stack.parkspring.frontend.afterLoginController">
    <top>
       <Label alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" text="WELCOME" BorderPane.alignment="CENTER">
          <font>
