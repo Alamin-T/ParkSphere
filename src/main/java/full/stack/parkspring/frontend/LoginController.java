@@ -1,20 +1,15 @@
 package full.stack.parkspring.frontend;
 
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.shape.Polyline;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.Map;
-import java.util.ResourceBundle;
 
 public class LoginController {
 
@@ -22,56 +17,52 @@ public class LoginController {
     private Button LoginButton;
 
     @FXML
+    private Label invalidLoginMessage;
+
+    @FXML
+    private PasswordField passwordTextField;
+
+    @FXML
+    private Label registerButton;
+
+    @FXML
+    private Label forgotPasswordButton;
+
+    @FXML
+    private TextField usernameTextField;
+
+    // Method to load the after-login page
+    @FXML
     private void loadAfterLoginPage() {
         String enteredEmail = usernameTextField.getText().trim();
         String enteredPassword = passwordTextField.getText().trim();
-
         Map<String, String> users = forgotPasswordController.getUsers();
-
 
         if (users.containsKey(enteredEmail.toLowerCase()) && users.get(enteredEmail.toLowerCase()).equals(enteredPassword)) {
             try {
-                // Load the FXML file for the new page
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("afterLogin.fxml"));
                 Parent root = fxmlLoader.load();
-
-                // Get the current stage (window)
                 Stage stage = (Stage) LoginButton.getScene().getWindow();
-
-                // Set the scene to the new root (afterLogin.fxml)
                 stage.setScene(new Scene(root));
                 stage.show();
             } catch (IOException e) {
                 e.printStackTrace();
-
             }
         } else {
             invalidLoginMessage.setText("Invalid Login! Please try again.");
         }
-
     }
 
-    @FXML
-    private Label invalidLoginMessage;
-
+    // Method to set invalid login message based on user input
     public void setInvalidLoginMessageOnAction(ActionEvent event) throws IOException {
-
         if (usernameTextField.getText().isBlank() && passwordTextField.getText().isBlank()) {
             invalidLoginMessage.setText("Please enter username and password.");
         } else if (usernameTextField.getText().isBlank() || passwordTextField.getText().isBlank()) {
             invalidLoginMessage.setText("Invalid Login! Please try again.");
         }
-
-
     }
 
-    @FXML
-    private PasswordField passwordTextField;
-
-
-    @FXML
-    private Label registerButton;
-
+    // Methods for handling hover and click events for the "Register" label
     @FXML
     public void onLabelHoverReg() {
         registerButton.setStyle("-fx-font-size: 15.4px; -fx-text-fill: #000ea8; -fx-underline: true; -fx-font-family: 'Tw Cen MT'");
@@ -95,9 +86,7 @@ public class LoginController {
         }
     }
 
-    @FXML
-    private Label forgotPasswordButton;
-
+    // Methods for handling hover and click events for the "Forgot Password" label
     @FXML
     public void onLabelHoverForgot() {
         forgotPasswordButton.setStyle("-fx-font-size: 13.4px; -fx-text-fill: #000ea8; -fx-underline: true; -fx-font-family: 'Tw Cen MT'");
@@ -121,17 +110,11 @@ public class LoginController {
         }
     }
 
-
-    @FXML
-    private TextField usernameTextField;
-
-
+    // Method to show an alert
     private void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
         alert.setContentText(message);
         alert.showAndWait();
     }
-
-
 }
