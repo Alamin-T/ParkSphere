@@ -21,7 +21,6 @@ public class afterLoginController {
         Stage stage = Main.getStage();
         stage.setScene(signInScene);
         stage.show();
-
     }
 
 

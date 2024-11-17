@@ -16,102 +16,88 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import javax.swing.*;
 import java.io.IOException;
 
 public class BookingController {
 
-    public Button confirmButton;
-    private ToggleGroup parkingTypeGroup;
-
+    // UI Components
     @FXML
     private ComboBox<String> carComboBox;
-
-    @FXML
-    public RadioButton regularRadioButton;
-
-    @FXML
-    public RadioButton vipRadioButton;
-
-    @FXML
-    private ScrollPane timeSlotScrollPane;
-
-    public void setSelectedTimeSlot(String time){
-        this.selectedTimeSlot = time;
-    }
-
-    public String getSelectedTimeSlot(){
-        return selectedTimeSlot;
-    }
-
-    public void onTimeSlotSelected(String time){
-        setSelectedTimeSlot(time);
-    }
-    // Add this declaration
-
-    @FXML
-    private String selectedTimeSlot;
 
     @FXML
     private DatePicker datePicker;
 
     @FXML
-    private ProgressBar progressBar; // Progress bar to show loading status
+    private ProgressBar progressBar;
+
+    @FXML
+    private ScrollPane timeSlotScrollPane;
+
+    @FXML
+    private Button confirmButton;
+
+    @FXML
+    private RadioButton regularRadioButton;
+
+    @FXML
+    private RadioButton vipRadioButton;
 
     @FXML
     private VBox slot1, slot2, slot3, slot4, slot5, slot6, slot7, slot8, slot9, slot10, slot11, slot12, slot13, slot14, slot15, slot16, slot17;
 
     @FXML
     private Label statusLabel1, statusLabel2, statusLabel3, statusLabel4, statusLabel5,
-            statusLabel6, statusLabel7, statusLabel8, statusLabel9, statusLabel10, statusLabel11; // Declare status labels
+            statusLabel6, statusLabel7, statusLabel8, statusLabel9, statusLabel10, statusLabel11;
 
-    private VBox[] slots; // Store all slots in an array for easier management
-    private Label[] statusLabels; // Store all status labels in an array for easier management
+    // Variables for managing parking slots
+    private VBox[] slots;
+    private Label[] statusLabels;
     private VBox selectedSlot;
 
+    // Variables for parking type and time slot selection
+    private ToggleGroup parkingTypeGroup;
+    private String selectedTimeSlot;
+
+    /**
+     * Initialization method, called after FXML components are loaded.
+     */
     @FXML
     public void initialize() {
-
-        // Initially hide the time slot ScrollPane and progress bar
-        progressBar.setVisible(false); // Initially hide the progress bar
-
-        // Initialize the slots and status labels
-        slots = new VBox[]{slot1, slot2, slot3, slot4, slot5, slot6, slot7, slot8, slot9, slot10, slot11, slot12, slot13, slot14, slot15, slot16, slot17};
-        statusLabels = new Label[]{statusLabel1, statusLabel2, statusLabel3, statusLabel4,
-                statusLabel5, statusLabel6, statusLabel7, statusLabel8,
-                statusLabel9, statusLabel10, statusLabel11, statusLabel2, statusLabel3, statusLabel4, statusLabel5, statusLabel6, statusLabel7};
-
-        DropShadow dropShadow = new DropShadow(10, 0, 5, Color.rgb(0, 0, 0, 0.4));
-
-        for (VBox slot : slots) {
-            applyDropShadowAndHandlers(slot, dropShadow);
-
-
-        }
-
-        InnerShadow innerShadow = new InnerShadow();
-        innerShadow.setColor(Color.BLACK);
-        innerShadow.setOffsetX(0);
-        innerShadow.setOffsetY(0);
-        innerShadow.setRadius(10);
-
+        // Set up the parking type toggle group
         parkingTypeGroup = new ToggleGroup();
-        // Add the radio buttons to the group
         regularRadioButton.setToggleGroup(parkingTypeGroup);
         vipRadioButton.setToggleGroup(parkingTypeGroup);
 
+        // Hide the progress bar initially
+        progressBar.setVisible(false);
 
+        // Initialize the slots and status labels arrays
+        slots = new VBox[]{slot1, slot2, slot3, slot4, slot5, slot6, slot7, slot8, slot9, slot10, slot11, slot12, slot13, slot14, slot15, slot16, slot17};
+        statusLabels = new Label[]{statusLabel1, statusLabel2, statusLabel3, statusLabel4,
+                statusLabel5, statusLabel6, statusLabel7, statusLabel8,
+                statusLabel9, statusLabel10, statusLabel11};
 
+        // Apply drop shadow and mouse handlers to all slots
+        DropShadow dropShadow = new DropShadow(10, 0, 5, Color.rgb(0, 0, 0, 0.4));
+        for (VBox slot : slots) {
+            applyDropShadowAndHandlers(slot, dropShadow);
+        }
     }
 
+    /**
+     * Applies drop shadow and mouse click handlers to a parking slot.
+     */
     @FXML
     private void applyDropShadowAndHandlers(VBox slot, DropShadow dropShadow) {
-        if (slot != null) { // Check for null to prevent NullPointerException
+        if (slot != null) {
             slot.setEffect(dropShadow);
             slot.setOnMouseClicked(this::handleClick);
         }
     }
 
+    /**
+     * Handles the click event on a parking slot.
+     */
     @FXML
     private void handleClick(MouseEvent event) {
         VBox clickedSlot = (VBox) event.getSource();
@@ -121,31 +107,26 @@ public class BookingController {
         String timeSlot = timeSlotLabel.getText();
         String status = statusLabel.getText();
 
-        // Check if clicked slot is already selected
         if (selectedSlot == clickedSlot) {
             resetSlotAppearance(clickedSlot);
             selectedSlot = null;
+        } else if ("Occupied".equals(status)) {
+            showAlert("Error", "This time slot is taken and cannot be selected.");
         } else {
-            if ("Occupied".equals(status)) {
-                showAlert("Error", "This time slot is taken and cannot be selected.");
-            } else {
-                if (selectedSlot != null) {
-                    resetSlotAppearance(selectedSlot);
-                }
-
-                changeSlotAppearance(clickedSlot);
-                selectedSlot = clickedSlot;
-
-                // This sets the selected time slot
-                setSelectedTimeSlot(timeSlot);
-                System.out.println("Time Slot Clicked: " + timeSlot);
+            if (selectedSlot != null) {
+                resetSlotAppearance(selectedSlot);
             }
+
+            changeSlotAppearance(clickedSlot);
+            selectedSlot = clickedSlot;
+            setSelectedTimeSlot(timeSlot);
+            System.out.println("Time Slot Clicked: " + timeSlot);
         }
     }
 
-
-
-
+    /**
+     * Changes the appearance of a selected parking slot.
+     */
     @FXML
     private void changeSlotAppearance(VBox slot) {
         ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(100), slot);
@@ -156,6 +137,9 @@ public class BookingController {
         scaleTransition.play();
     }
 
+    /**
+     * Resets the appearance of a deselected parking slot.
+     */
     @FXML
     private void resetSlotAppearance(VBox slot) {
         ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(100), slot);
@@ -166,76 +150,60 @@ public class BookingController {
         scaleTransition.play();
     }
 
+    /**
+     * Handles the search button click, simulating a loading process.
+     */
     @FXML
     private void handleSearchClick() {
-
         if (datePicker.getValue() != null) {
-            progressBar.setVisible(true); // Show the progress bar
-            // Simulate loading for 2.5 seconds
+            progressBar.setVisible(true);
+
             new Thread(() -> {
                 try {
                     Thread.sleep(1500); // Simulate loading time
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                // Update UI on the JavaFX Application Thread
+
                 javafx.application.Platform.runLater(() -> {
                     timeSlotScrollPane.setVisible(true);
-                    confirmButton.setVisible(true);// Make the ScrollPane visible
-                    progressBar.setVisible(false); // Hide the progress bar
+                    confirmButton.setVisible(true);
+                    progressBar.setVisible(false);
                 });
             }).start();
         } else {
             showAlert("Error", "Please select a date.");
         }
-
-
-
     }
 
-    @FXML
-    public void handleTimeSlotClick(Label statusLabel) {
-        selectedTimeSlot = statusLabel.getText();
-    }
-
+    /**
+     * Handles the confirm button click and transitions to the booking summary page.
+     */
     @FXML
     public void handleConfirmClick(ActionEvent event) throws IOException {
-        // Get the selected car
         String selectedCar = carComboBox.getValue();
-
-        // Get the selected date
         String selectedDate = (datePicker.getValue() != null) ? datePicker.getValue().toString() : "Not selected";
-
-        // Get the selected parking type (VIP or Regular)
         RadioButton selectedParkingTypeButton = (RadioButton) parkingTypeGroup.getSelectedToggle();
         String selectedParkingType = (selectedParkingTypeButton != null) ? selectedParkingTypeButton.getText() : "Not selected";
-
-        // Get the selected time slot (set when a time slot is clicked)
         String timeSlot = selectedTimeSlot != null ? selectedTimeSlot : "Not selected";
 
-        // Load the booking summary page
         FXMLLoader loader = new FXMLLoader(getClass().getResource("bookingSummary.fxml"));
         Parent summaryRoot = loader.load();
 
-        // Pass the data to the summary page controller
         BookingSummaryController summaryController = loader.getController();
         summaryController.setSummaryDetails(selectedCar, selectedParkingType, selectedDate, timeSlot);
 
-        // Create a new Stage for the booking summary
         Stage newStage = new Stage();
         newStage.setTitle("Booking Summary");
         newStage.setScene(new Scene(summaryRoot));
-
-        // Set the modality to block events from the owner window
         newStage.initModality(javafx.stage.Modality.WINDOW_MODAL);
         newStage.initOwner(((Node) event.getSource()).getScene().getWindow());
-
-        // Show the new Stage and wait for it to close before returning
         newStage.showAndWait();
     }
 
-
-
+    /**
+     * Displays an alert message.
+     */
     @FXML
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -243,5 +211,14 @@ public class BookingController {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    // Getters and Setters for selectedTimeSlot
+    public void setSelectedTimeSlot(String time) {
+        this.selectedTimeSlot = time;
+    }
+
+    public String getSelectedTimeSlot() {
+        return selectedTimeSlot;
     }
 }
