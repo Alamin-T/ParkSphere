@@ -11,9 +11,11 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.StrokeLineCap;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
 
+@Controller
 public class HomePageController {
 
     @FXML private Button joinUsButton;
