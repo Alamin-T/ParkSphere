@@ -15,7 +15,7 @@ public class afterLoginController {
     private Button logoutButton;
 
     public void userLogout(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("login.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller_fxml/login.fxml"));
         Scene signInScene = new Scene(fxmlLoader.load(), 900, 550);
 
         Stage stage = Main.getStage();

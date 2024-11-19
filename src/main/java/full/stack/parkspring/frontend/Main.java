@@ -17,7 +17,7 @@ public class Main extends Application {
         stg = stage;
         stage.setResizable(false);
 
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("homePage.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/controller_fxml/homePage.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1350 , 760);
         stage.setTitle("Park Sphere");
         stage.setScene(scene);

@@ -30,7 +30,7 @@ public class forgotPasswordController {
     }
 
     public void cancelButtonOnClick() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("login.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller_fxml/login.fxml"));
         Parent root = null;
         try {
             root = fxmlLoader.load();

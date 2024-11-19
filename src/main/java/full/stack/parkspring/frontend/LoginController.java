@@ -40,7 +40,7 @@ public class LoginController {
 
         if (users.containsKey(enteredEmail.toLowerCase()) && users.get(enteredEmail.toLowerCase()).equals(enteredPassword)) {
             try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("afterLogin.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller_fxml/afterLogin.fxml"));
                 Parent root = fxmlLoader.load();
                 Stage stage = (Stage) LoginButton.getScene().getWindow();
                 stage.setScene(new Scene(root));
@@ -76,7 +76,7 @@ public class LoginController {
     @FXML
     public void onLabelClickReg() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("register.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller_fxml/register.fxml"));
             Parent root = fxmlLoader.load();
             Stage stage = (Stage) registerButton.getScene().getWindow();
             stage.setScene(new Scene(root));
@@ -100,7 +100,7 @@ public class LoginController {
     @FXML
     public void onLabelClickForgot() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("forgotPassword.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller_fxml/forgotPassword.fxml"));
             Parent root = fxmlLoader.load();
             Stage stage = (Stage) forgotPasswordButton.getScene().getWindow();
             stage.setScene(new Scene(root));

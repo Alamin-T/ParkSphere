@@ -187,7 +187,7 @@ public class BookingController {
         String selectedParkingType = (selectedParkingTypeButton != null) ? selectedParkingTypeButton.getText() : "Not selected";
         String timeSlot = selectedTimeSlot != null ? selectedTimeSlot : "Not selected";
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("bookingSummary.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/controller_fxml/bookingSummary.fxml"));
         Parent summaryRoot = loader.load();
 
         BookingSummaryController summaryController = loader.getController();

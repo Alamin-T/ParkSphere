@@ -26,7 +26,7 @@ public class HomePageController {
     @FXML
     public void reserveButtonOnClick() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("reserveBooking.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller_fxml/reserveBooking.fxml"));
             Parent root = fxmlLoader.load();
             Stage stage = (Stage) reserveLabel.getScene().getWindow();
             stage.setScene(new Scene(root));
@@ -39,7 +39,7 @@ public class HomePageController {
     @FXML
     public void homeButtonOnClick() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("homePage.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller_fxml/homePage.fxml"));
             Parent root = fxmlLoader.load();
             Stage stage = (Stage) homeButton.getScene().getWindow();
             stage.setScene(new Scene(root));
@@ -51,7 +51,7 @@ public class HomePageController {
 
     @FXML
     public void SignInButtonOnClick() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("login.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller_fxml/login.fxml"));
         Parent loginRoot = fxmlLoader.load();
 
         Stage loginStage = new Stage();
