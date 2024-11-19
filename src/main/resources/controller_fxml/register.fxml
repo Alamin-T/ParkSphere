@@ -48,7 +48,7 @@
         </AnchorPane>
     </left>
     <center>
-        <AnchorPane prefHeight="527.0" prefWidth="588.0" style="-fx-background-color: #fffff;" BorderPane.alignment="CENTER">
+        <AnchorPane prefHeight="527.0" prefWidth="588.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
             <children>
                 <Label alignment="CENTER" contentDisplay="CENTER" layoutX="168.0" layoutY="83.0" text="Lets Get You Signed Up!" textAlignment="CENTER" textFill="#8e67f8">
                     <effect>
