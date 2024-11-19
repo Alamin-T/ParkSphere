@@ -9,11 +9,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+@Controller
 public class forgotPasswordController {
 
 

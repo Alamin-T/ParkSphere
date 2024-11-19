@@ -15,9 +15,11 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
 
+@Controller
 public class BookingController {
 
     // UI Components

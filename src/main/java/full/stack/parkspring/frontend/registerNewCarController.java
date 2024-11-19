@@ -9,7 +9,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
+import org.springframework.stereotype.Controller;
 
+@Controller
 public class registerNewCarController {
 
     @FXML

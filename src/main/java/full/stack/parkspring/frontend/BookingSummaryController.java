@@ -2,7 +2,9 @@ package full.stack.parkspring.frontend;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import org.springframework.stereotype.Controller;
 
+@Controller
 public class BookingSummaryController {
 
     @FXML
