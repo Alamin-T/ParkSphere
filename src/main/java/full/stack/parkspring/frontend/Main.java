@@ -1,5 +1,6 @@
 package full.stack.parkspring.frontend;
 
+import full.stack.parkspring.Manager;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +12,7 @@ import java.io.IOException;
 public class Main extends Application {
 
     private static Stage stg;
+    static Manager manager;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -22,6 +24,12 @@ public class Main extends Application {
         stage.setTitle("Park Sphere");
         stage.setScene(scene);
         stage.show();
+    }
+
+    @Override
+    public void stop() throws Exception {
+        manager.stop();
+        super.stop();
     }
 
     public static Stage getStage() {
