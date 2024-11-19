@@ -66,14 +66,12 @@ public class registerController {
                 return;
             }
 
-            User user = new User();
-            user.setEmail(email);
-            user.setUsername(firstName + lastName); // Generating a simple username
-            user.setPassword(password);
-            user.setGender(gender);
-
-
-
+            User user = User.builder()
+                    .email(email)
+                    .username(firstName)
+                    .password(password)
+                    .gender(gender)
+                    .build();
 
             RestTemplate restTemplate = new RestTemplate();
             ResponseEntity<String> response = restTemplate.postForEntity(
