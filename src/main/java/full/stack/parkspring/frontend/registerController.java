@@ -1,19 +1,19 @@
 package full.stack.parkspring.frontend;
+
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import full.stack.parkspring.model.Gender;
+import full.stack.parkspring.model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
-import javafx.scene.shape.Polyline;
-import javafx.stage.Stage;
+import javafx.scene.control.*;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.client.RestTemplate;
 
-import java.io.IOException;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 @Controller
 public class registerController {
@@ -21,32 +21,11 @@ public class registerController {
     @FXML
     private TextField firstNameField;
 
-
-    @FXML
-    private Button RegisterButton;
-
-    @FXML
-    private DatePicker dateOfBirthField;
-
-    @FXML
-    private TextField emailField;
-
-    @FXML
-    private RadioButton femaleRadioButton;
-
-
-
-    @FXML
-    private Label invalidLoginMessage;
-
     @FXML
     private TextField lastNameField;
 
     @FXML
-    private RadioButton maleRadioButton;
-
-    @FXML
-    private RadioButton otherRadioButton;
+    private TextField emailField;
 
     @FXML
     private TextField enterPasswordField;
@@ -55,53 +34,60 @@ public class registerController {
     private TextField reEnterPasswordField;
 
     @FXML
-    public void setCancelMessageOnAction(ActionEvent event) {
-        // Logic to handle cancel action
-        // For example, you could clear the fields or display a message
-        invalidLoginMessage.setText("Registration cancelled.");
-    }
+    private RadioButton maleRadioButton;
 
     @FXML
-    public void setInvalidRegisterMessageOnAction() {
-        // Example validation logic
-        if (firstNameField.getText().isEmpty() || lastNameField.getText().isEmpty() ||
-                emailField.getText().isEmpty() || enterPasswordField.getText().isEmpty() ||
-                reEnterPasswordField.getText().isEmpty()) {
-            invalidLoginMessage.setText("Please fill in all fields.");
-        } else if (!enterPasswordField.getText().equals(reEnterPasswordField.getText())) {
-            invalidLoginMessage.setText("Passwords do not match.");
-        } else {
-            // Registration logic goes here (e.g., save to database)
-            invalidLoginMessage.setText("Registration successful!");
-        }
-    }
-
+    private RadioButton femaleRadioButton;
 
     @FXML
-    private Polyline cancelButton;
-    @FXML
-    public void onPolylineHover() {
-        cancelButton.setStyle("-fx-stroke: #000ea8; -fx-stroke-width: 4px;");
-    }
+    private Label invalidLoginMessage;
 
     @FXML
-    public void onPolylineExit() {
-        cancelButton.setStyle("-fx-stroke: #8589f1; -fx-stroke-width: 2px;");
-    }
+    private Button RegisterButton;
 
-
-    public void cancelButtonOnAction() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller_fxml/login.fxml"));
-        Parent root = null;
+    @FXML
+    public void setInvalidRegisterMessageOnAction(ActionEvent event) {
         try {
-            root = fxmlLoader.load();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+            String firstName = firstNameField.getText();
+            String lastName = lastNameField.getText();
+            String email = emailField.getText();
+            String password = enterPasswordField.getText();
+            String confirmPassword = reEnterPasswordField.getText();
+            Gender gender = maleRadioButton.isSelected() ? Gender.MALE : Gender.FEMALE;
+
+            // Validate fields
+            if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() ||
+                    password.isEmpty() || confirmPassword.isEmpty()) {
+                invalidLoginMessage.setText("Please fill in all fields.");
+                return;
+            }
+            if (!password.equals(confirmPassword)) {
+                invalidLoginMessage.setText("Passwords do not match.");
+                return;
+            }
+
+            User user = new User();
+            user.setEmail(email);
+            user.setUsername(firstName + lastName); // Generating a simple username
+            user.setPassword(password);
+            user.setGender(gender);
+
+
+
+
+            RestTemplate restTemplate = new RestTemplate();
+            ResponseEntity<String> response = restTemplate.postForEntity(
+                    "http://localhost:8081/api/users/register", user, String.class);
+
+            // Handle response
+            if (response.getStatusCode().is2xxSuccessful()) {
+                invalidLoginMessage.setText("Registration successful!");
+            } else {
+                invalidLoginMessage.setText("Registration failed. Try again.");
+            }
+        } catch (Exception e) {
+            invalidLoginMessage.setText("Error occurred during registration.");
+            e.printStackTrace();
         }
-        Stage stage = (Stage) cancelButton.getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.show();
     }
-
-
 }
