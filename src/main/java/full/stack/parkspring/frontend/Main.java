@@ -26,11 +26,11 @@ public class Main extends Application {
         stage.show();
     }
 
-    @Override
+   /* @Override
     public void stop() throws Exception {
         manager.stop();
         super.stop();
-    }
+    } */
 
     public static Stage getStage() {
         return stg;

@@ -6,11 +6,17 @@ import full.stack.parkspring.model.Gender;
 import full.stack.parkspring.model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.shape.Polyline;
+import javafx.stage.Stage;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.IOException;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -46,6 +52,31 @@ public class registerController {
     private Button RegisterButton;
 
     @FXML
+    private Polyline cancelButton;
+
+    public void onPolylineHover() {
+        cancelButton.setStyle("-fx-stroke: #000ea8; -fx-stroke-width: 4px;");
+    }
+
+    public void onPolylineExit() {
+        cancelButton.setStyle("-fx-stroke: #8589f1; -fx-stroke-width: 2px;");
+    }
+
+
+    public void cancelButtonOnAction()  {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller_fxml/login.fxml"));
+        Parent root = null;
+        try {
+            root = fxmlLoader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Stage stage = (Stage) cancelButton.getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
+    @FXML
     public void setInvalidRegisterMessageOnAction(ActionEvent event) {
         try {
             String firstName = firstNameField.getText();
@@ -72,9 +103,6 @@ public class registerController {
             user.setPassword(password);
             user.setGender(gender);
 
-
-
-
             RestTemplate restTemplate = new RestTemplate();
             ResponseEntity<String> response = restTemplate.postForEntity(
                     "http://localhost:8081/api/users/register", user, String.class);
@@ -83,11 +111,14 @@ public class registerController {
             if (response.getStatusCode().is2xxSuccessful()) {
                 invalidLoginMessage.setText("Registration successful!");
             } else {
-                invalidLoginMessage.setText("Registration failed. Try again.");
+                invalidLoginMessage.setText("Registration failed: " + response.getBody());
             }
         } catch (Exception e) {
             invalidLoginMessage.setText("Error occurred during registration.");
-            e.printStackTrace();
+            e.printStackTrace(); // Print stack trace to debug the issue
         }
     }
+
+
+
 }
