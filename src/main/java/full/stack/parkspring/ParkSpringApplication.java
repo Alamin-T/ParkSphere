@@ -4,8 +4,10 @@ import full.stack.parkspring.frontend.Main;
 import javafx.application.Application;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 @SpringBootApplication
+@EntityScan(basePackages = "full.stack.parkspring.model")
 public class ParkSpringApplication {
 
     public static void main(String[] args) {

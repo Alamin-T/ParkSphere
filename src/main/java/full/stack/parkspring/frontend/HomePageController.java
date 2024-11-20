@@ -35,6 +35,7 @@ public class HomePageController {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
+            System.out.println("Error loading reserve booking window");
         }
     }
 
@@ -48,30 +49,44 @@ public class HomePageController {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
+            System.out.println("Error loading home page");
         }
     }
 
     @FXML
-    public void SignInButtonOnClick() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller_fxml/login.fxml"));
-        Parent loginRoot = fxmlLoader.load();
+    public void SignInButtonOnClick() {
+        try {
+            // Load the login FXML file
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller_fxml/login.fxml"));
+            Parent loginRoot = fxmlLoader.load();
 
-        Stage loginStage = new Stage();
-        loginStage.setTitle("Login");
+            // Initialize the login stage
+            Stage loginStage = new Stage();
+            loginStage.setTitle("Login");
 
-        Scene loginScene = new Scene(loginRoot);
-        loginStage.setScene(loginScene);
+            Scene loginScene = new Scene(loginRoot);
+            loginStage.setScene(loginScene);
 
-        loginStage.initModality(javafx.stage.Modality.WINDOW_MODAL);
-        loginStage.initOwner(signInButton.getScene().getWindow());
+            // Set the login stage modality (blocks interaction with other windows)
+            loginStage.initModality(javafx.stage.Modality.WINDOW_MODAL);
+            loginStage.initOwner(signInButton.getScene().getWindow());
 
-        loginStage.showAndWait();
+            // Show the login stage and wait for it to close before proceeding
+            loginStage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error loading login window");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Unexpected error occurred while opening login stage");
+        }
     }
 
     @FXML
     public void initialize() {
         avatarMenu.setVisible(false);
 
+        // Add hover effect on avatar menu labels
         for (Node child : avatarMenu.getChildren()) {
             if (child instanceof Label) {
                 Label label = (Label) child;

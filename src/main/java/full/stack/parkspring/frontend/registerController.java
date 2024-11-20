@@ -3,7 +3,7 @@ package full.stack.parkspring.frontend;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import full.stack.parkspring.model.Gender;
-import full.stack.parkspring.model.User;
+import full.stack.parkspring.model.AppUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,7 +22,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 @Controller
-public class registerController {
+public class
+registerController {
 
     @FXML
     private TextField firstNameField;
@@ -97,7 +98,7 @@ public class registerController {
                 return;
             }
 
-            User user = new User();
+            AppUser user = new AppUser();
             user.setEmail(email);
             user.setUsername(firstName + lastName); // Generating a simple username
             user.setPassword(password);
