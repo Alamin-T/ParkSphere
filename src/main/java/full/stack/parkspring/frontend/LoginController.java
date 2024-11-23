@@ -1,6 +1,8 @@
 package full.stack.parkspring.frontend;
 
-import javafx.event.ActionEvent;
+import full.stack.parkspring.config.ApplicationContextProvider;
+import full.stack.parkspring.model.AppUser;
+import full.stack.parkspring.repository.UserRepository;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,10 +12,12 @@ import javafx.stage.Stage;
 import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
-import java.util.Map;
+import java.util.Optional;
 
 @Controller
 public class LoginController {
+
+    private final UserRepository userRepository;
 
     @FXML
     private Button LoginButton;
@@ -33,14 +37,20 @@ public class LoginController {
     @FXML
     private TextField usernameTextField;
 
+    public LoginController() {
+        this.userRepository = ApplicationContextProvider.getContext().getBean(UserRepository.class);
+    }
+
     // Method to load the after-login page
     @FXML
     private void loadAfterLoginPage() {
         String enteredEmail = usernameTextField.getText().trim();
         String enteredPassword = passwordTextField.getText().trim();
-        Map<String, String> users = forgotPasswordController.getUsers();
 
-        if (users.containsKey(enteredEmail.toLowerCase()) && users.get(enteredEmail.toLowerCase()).equals(enteredPassword)) {
+        // Fetch user from the database
+        Optional<AppUser> optionalUser = userRepository.findByEmail(enteredEmail.toLowerCase());
+
+        if (optionalUser.isPresent() && optionalUser.get().getPassword().equals(enteredPassword)) {
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller_fxml/afterLogin.fxml"));
                 Parent root = fxmlLoader.load();
@@ -56,7 +66,7 @@ public class LoginController {
     }
 
     // Method to set invalid login message based on user input
-    public void setInvalidLoginMessageOnAction(ActionEvent event) throws IOException {
+    public void setInvalidLoginMessageOnAction() {
         if (usernameTextField.getText().isBlank() && passwordTextField.getText().isBlank()) {
             invalidLoginMessage.setText("Please enter username and password.");
         } else if (usernameTextField.getText().isBlank() || passwordTextField.getText().isBlank()) {
