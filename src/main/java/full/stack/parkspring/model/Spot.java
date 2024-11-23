@@ -17,8 +17,7 @@ public class Spot {
     private int id;
     @Column(nullable = false, unique = true)
     private String spotId;
-    @Enumerated(EnumType.STRING)
-    private VehicleType vehicleType;
+
     @Enumerated(EnumType.STRING)
     private PowerType powerType;
 }
