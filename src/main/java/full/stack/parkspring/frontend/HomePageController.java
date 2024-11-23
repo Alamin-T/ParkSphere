@@ -19,7 +19,7 @@ import java.io.IOException;
 public class HomePageController {
 
     @FXML private Button joinUsButton;
-    @FXML private Label homeButton, signInButton, reserveLabel, menuBars;
+    @FXML private Label homeButton, signInButton, reserveLabel, menuBars,YourCarsButton;
     @FXML private ImageView profileAvatarIcon;
     @FXML private TextField searchBarField;
     @FXML private VBox avatarMenu;
@@ -81,6 +81,21 @@ public class HomePageController {
             System.out.println("Unexpected error occurred while opening login stage");
         }
     }
+
+    @FXML
+    public void YourCarsButtonOnClick() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller_fxml/registerNewCar.fxml"));
+            Parent root = fxmlLoader.load();
+            Stage stage = (Stage) YourCarsButton.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error loading home page");
+        }
+    }
+
 
     @FXML
     public void initialize() {

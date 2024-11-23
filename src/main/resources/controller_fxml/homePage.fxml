@@ -157,7 +157,7 @@
                            <font>
                               <Font name="Tw Cen MT" size="16.0" />
                            </font></Label>
-                              <Label maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="180.0" styleClass="hoverable-label" text="  Your Cars">
+                              <Label fx:id="YourCarsButton" maxHeight="-Infinity" minHeight="-Infinity" onMouseClicked="#YourCarsButtonOnClick" prefHeight="40.0" prefWidth="180.0" styleClass="hoverable-label" text="  Your Cars">
                            <font>
                               <Font name="Tw Cen MT" size="16.0" />
                            </font></Label>
