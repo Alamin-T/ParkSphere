@@ -88,9 +88,6 @@ public class registerNewCarController {
     private Label signInButton;
 
     @FXML
-    private Label YourCarsButton;
-
-    @FXML
     private ToggleGroup powerTypeToggleGroup;
 
     @FXML
@@ -104,18 +101,39 @@ public class registerNewCarController {
 
 
 
-    @PostConstruct
-    public void init() {
-        // This will be called after the controller is constructed
-        System.out.println("VehicleRepository: " + vehicleRepository); // Check if it's null
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private VehicleRepository vehicleRepository;
+
+    @FXML
+    public void initialize() {
+
+        ObservableList<String> licenseClasses = FXCollections.observableArrayList(
+                "Private", "Public/Taxi", "Commercial", "Rental", "Diplomatic", "Emergency/Police"
+        );
+
+        LicenseClassComboBox.setItems(licenseClasses);
+
+        powerTypeToggleGroup = new ToggleGroup();
+        petrolDieselRadioButton.setToggleGroup(powerTypeToggleGroup);
+        electricRadioButton.setToggleGroup(powerTypeToggleGroup);
+        hybridRadioButton.setToggleGroup(powerTypeToggleGroup);
+
+
+        avatarMenu.setVisible(false);
+        for (Node child : avatarMenu.getChildren()) {
+            if (child instanceof Label) {
+                Label label = (Label) child;
+                label.setOnMouseEntered(event -> label.setStyle("-fx-background-color: #9da0f3; -fx-text-fill: #000000;"));
+                label.setOnMouseExited(event -> label.setStyle(""));
+            }
+        }
+
     }
 
 
-    @Autowired
-    private UserRepository userRepository; // Injecting userRepository
-
-    @Autowired
-    private VehicleRepository vehicleRepository; // Autowire the VehicleRepository
 
     @FXML
     public void onRegisterButtonClick() {
@@ -135,7 +153,7 @@ public class registerNewCarController {
         System.out.println("Debug: License Class = " + licenseClass);
         System.out.println("Debug: Color = " + color);
 
-        // Get the selected power type from the ToggleGroup
+
         RadioButton selectedRadioButton = (RadioButton) powerTypeToggleGroup.getSelectedToggle();
         if (selectedRadioButton == null) {
             showAlert("Error", "Please select a Power Type!");
@@ -143,10 +161,10 @@ public class registerNewCarController {
         }
         String selectedPowerTypeText = selectedRadioButton.getText();
 
-        // Debugging: Print selected power type
+
         System.out.println("Debug: Selected Power Type = " + selectedPowerTypeText);
 
-        // Perform basic validation
+
         if (carModel.isEmpty() || licensePlate.isEmpty() || ownerName.isEmpty() || licenseClass == null) {
             showAlert("Error", "All fields must be filled!");
             return;
@@ -155,46 +173,47 @@ public class registerNewCarController {
         try {
             PowerType powerType = PowerType.fromDisplayName(selectedPowerTypeText);
 
-            // Debugging: Check parsed PowerType
+
             System.out.println("Debug: Parsed PowerType = " + powerType);
 
             LicenseClass licenseClassEnum = LicenseClass.valueOf(licenseClass.toUpperCase());
 
-            // Debugging: Check parsed LicenseClass
+
             System.out.println("Debug: Parsed LicenseClass = " + licenseClassEnum);
 
             Vehicle vehicle = Vehicle.builder()
                     .plate(licensePlate)
-                    .licenseNumber(licenseNumber) // Add license number to Vehicle object
+                    .licenseNumber(licenseNumber)
                     .powerType(powerType)
                     .licenseClass(licenseClassEnum)
-                    .user(null) // Assuming null for now; set user if needed
+                    .user(null)
                     .color(color)
                     .build();
 
-            // Debugging: Print Vehicle object
+
             System.out.println("Debug: Built Vehicle = " + vehicle);
 
-            // Save the vehicle to the database
 
 
-            // Show success alert
+
             showAlert("Success", "Vehicle registered successfully!");
         } catch (IllegalArgumentException e) {
-            System.err.println("Error: " + e.getMessage()); // Debugging: Print error message
+            System.err.println("Error: " + e.getMessage());
             showAlert("Error", "Invalid License Class or Power Type!");
         }
     }
 
+
+
 /*
     @FXML
     public void onRegisterButtonClick() {
-        // Get the data from text fields
+
         String carModel = CarModelField.getText();
         String licenseNumber = LicenseNumberField.getText();
         String licensePlate = LicensePlateField.getText();
         String ownerName = NameField.getText();
-        String licenseClass = LicenseClassComboBox.getValue(); // Get the license class from ComboBox
+        String licenseClass = LicenseClassComboBox.getValue();
         String color = ColorField.getText();
 
         // Get the selected power type from the ToggleGroup
@@ -205,7 +224,7 @@ public class registerNewCarController {
         }
         String selectedPowerTypeText = selectedRadioButton.getText();
 
-        // Perform basic validation
+
         if (carModel.isEmpty() || licensePlate.isEmpty() || ownerName.isEmpty() || licenseClass == null) {
             showAlert("Error", "All fields must be filled!");
             return;
@@ -219,7 +238,7 @@ public class registerNewCarController {
                     .licenseNumber(licenseNumber) // Add license number to Vehicle object
                     .powerType(powerType)
                     .licenseClass(LicenseClass.valueOf(licenseClass.toUpperCase()))
-                    .user(null) // Assuming null for now; set user if needed
+                    .user(null)
                     .color(color)
                     .build();
 
@@ -293,32 +312,6 @@ public class registerNewCarController {
             e.printStackTrace();
             System.out.println("Unexpected error occurred while opening login stage");
         }
-    }
-
-
-
-    @FXML
-    public void initialize() {
-        avatarMenu.setVisible(false);
-
-        // Add hover effect on avatar menu labels
-        for (Node child : avatarMenu.getChildren()) {
-            if (child instanceof Label) {
-                Label label = (Label) child;
-                label.setOnMouseEntered(event -> label.setStyle("-fx-background-color: #9da0f3; -fx-text-fill: #000000;"));
-                label.setOnMouseExited(event -> label.setStyle(""));
-            }
-        }
-        ObservableList<String> licenseClasses = FXCollections.observableArrayList(
-                "Private", "Public/Taxi", "Commercial", "Rental", "Diplomatic", "Emergency/Police"
-        );
-        LicenseClassComboBox.setItems(licenseClasses);
-
-        powerTypeToggleGroup = new ToggleGroup();
-        petrolDieselRadioButton.setToggleGroup(powerTypeToggleGroup);
-        electricRadioButton.setToggleGroup(powerTypeToggleGroup);
-        hybridRadioButton.setToggleGroup(powerTypeToggleGroup);
-
     }
 
     @FXML

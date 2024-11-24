@@ -1,15 +1,20 @@
 package full.stack.parkspring.frontend;
 
 import full.stack.parkspring.Manager;
+import full.stack.parkspring.ParkSpringApplication;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.context.ApplicationContext;
 
 import java.io.IOException;
 
 public class Main extends Application {
+
+    private static ApplicationContext springContext;
 
     private static Stage stg;
     static Manager manager;
@@ -39,6 +44,8 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
-        launch();
+        springContext = new SpringApplicationBuilder(ParkSpringApplication.class).run(args);
+
+        launch(args);
     }
 }
