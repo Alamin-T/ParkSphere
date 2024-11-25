@@ -172,6 +172,8 @@ public class registerNewCarController {
                     .color(color)
                     .build();
 
+            vehicleRepository.save(vehicle);
+
             // Debugging: Print Vehicle object
             System.out.println("Debug: Built Vehicle = " + vehicle);
 
