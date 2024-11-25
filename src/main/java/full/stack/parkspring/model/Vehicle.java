@@ -19,17 +19,17 @@ public class Vehicle {
 
     private String plate;
 
-    private String licenseNumber;  // Added licenseNumber field
+    private String licenseNumber;
 
     @Enumerated(EnumType.STRING)
     private PowerType powerType;
 
     @Enumerated(EnumType.STRING)
-    private LicenseClass licenseClass;  // Adding the LicenseClass enum
+    private LicenseClass licenseClass;
 
     private String color;
 
     @ManyToOne
-    @JoinColumn(name = "user_id") // Adjust nullability as required
+    @JoinColumn(name = "user_id")
     private AppUser user;
 }
