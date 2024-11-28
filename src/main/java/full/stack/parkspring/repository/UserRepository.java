@@ -2,6 +2,7 @@ package full.stack.parkspring.repository;
 
 import full.stack.parkspring.model.Gender;
 import full.stack.parkspring.model.AppUser;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -10,8 +11,10 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
+
+
 @Repository
-public interface UserRepository extends JpaRepository<AppUser, Long> {
+public interface UserRepository extends JpaRepository<AppUser, Integer> {
 
     // Read operations
     Optional<AppUser> findByEmail(String email);
@@ -20,7 +23,7 @@ public interface UserRepository extends JpaRepository<AppUser, Long> {
     List<AppUser> findAllByGender(Gender gender); // Example: Custom filter by gender.
 
     // Delete operations
-    void deleteById(Long id);
+    void deleteById(Integer id);
     void deleteByEmail(String email);
 
     // Existence checks

@@ -3,10 +3,8 @@ package full.stack.parkspring.frontend;
 import full.stack.parkspring.model.LicenseClass;
 import full.stack.parkspring.model.PowerType;
 import full.stack.parkspring.model.Vehicle;
-import full.stack.parkspring.model.AppUser;
 import full.stack.parkspring.repository.UserRepository;
 import full.stack.parkspring.repository.VehicleRepository;
-import jakarta.annotation.PostConstruct;
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
 import javafx.animation.ParallelTransition;
@@ -32,6 +30,7 @@ import javafx.scene.control.RadioButton;
 
 
 import java.io.IOException;
+
 
 @Controller
 public class registerNewCarController {
@@ -103,9 +102,10 @@ public class registerNewCarController {
 
     @Autowired
     private UserRepository userRepository;
-
     @Autowired
     private VehicleRepository vehicleRepository;
+
+
 
     @FXML
     public void initialize() {
@@ -134,7 +134,7 @@ public class registerNewCarController {
     }
 
 
-
+/*
     @FXML
     public void onRegisterButtonClick() {
         // Get the data from text fields
@@ -186,11 +186,11 @@ public class registerNewCarController {
                     .licenseNumber(licenseNumber)
                     .powerType(powerType)
                     .licenseClass(licenseClassEnum)
-                    .user(null)
                     .color(color)
                     .build();
 
 
+            vehicleRepository.save(vehicle);
             System.out.println("Debug: Built Vehicle = " + vehicle);
 
 
@@ -203,9 +203,9 @@ public class registerNewCarController {
         }
     }
 
+*/
 
 
-/*
     @FXML
     public void onRegisterButtonClick() {
 
@@ -238,7 +238,6 @@ public class registerNewCarController {
                     .licenseNumber(licenseNumber) // Add license number to Vehicle object
                     .powerType(powerType)
                     .licenseClass(LicenseClass.valueOf(licenseClass.toUpperCase()))
-                    .user(null)
                     .color(color)
                     .build();
 
@@ -253,7 +252,7 @@ public class registerNewCarController {
         }
     }
 
-*/
+
 
 
 

@@ -106,7 +106,7 @@ registerController {
 
             RestTemplate restTemplate = new RestTemplate();
             ResponseEntity<String> response = restTemplate.postForEntity(
-                    "http://localhost:8081/api/users/register", user, String.class);
+                    "http://localhost:8080/api/users/register", user, String.class);
 
             // Handle response
             if (response.getStatusCode().is2xxSuccessful()) {

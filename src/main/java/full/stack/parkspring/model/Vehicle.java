@@ -29,7 +29,7 @@ public class Vehicle {
 
     private String color;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private AppUser user;
+    //@ManyToOne
+   // @JoinColumn(name = "user_id")
+   // private AppUser user;
 }
