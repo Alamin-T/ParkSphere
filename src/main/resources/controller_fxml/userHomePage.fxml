@@ -14,7 +14,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="759.0" prefWidth="1350.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.loginpage.HomePageController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="759.0" prefWidth="1350.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="full.stack.parkspring.frontend.userHomePageController">
    <top>
       <AnchorPane minHeight="-Infinity" prefHeight="120.0" prefWidth="1350.0" style="-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #7F86FD, #A074FF, #8366FA);" BorderPane.alignment="CENTER">
          <effect>
@@ -58,12 +58,12 @@
             </TextField>
             <ImageView fitHeight="22.0" fitWidth="31.0" layoutX="842.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../search_icon_purple.png" />
+                  <Image url="@../images/search_icon_purple.png" />
                </image>
             </ImageView>
             <ImageView fx:id="profileAvatarIcon" fitHeight="44.0" fitWidth="46.0" layoutX="1218.0" layoutY="35.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../avatar_icon.png" />
+                  <Image url="@../images/avatar_icon.png" />
                </image>
             </ImageView>
             <Line fx:id="mBar1" endX="-83.0" layoutX="1393.0" layoutY="52.0" startX="-105.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="2.5" />
@@ -81,19 +81,21 @@
    <center>
       <AnchorPane minWidth="-Infinity" prefHeight="1306.0" prefWidth="1335.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
-            <VBox fx:id="avatarMenu" blendMode="SRC_ATOP" layoutX="1155.0" prefHeight="204.0" prefWidth="194.0" style="-fx-padding: 0; -fx-background-color: #f2f2f2;" visible="false">
+            <VBox fx:id="avatarMenu" blendMode="SRC_ATOP" layoutX="1164.0" prefHeight="240.0" prefWidth="179.0" style="-fx-padding: 0; -fx-background-color: #f2f2f2;" visible="false">
                <children>
-                  <Label fx:id="signInButton" maxHeight="-Infinity" minHeight="-Infinity" onMouseClicked="#SignInButtonOnClick" prefHeight="40.0" prefWidth="180.0" styleClass="hoverable-label" text="  Sign in">
+
+                  
+                  <Label maxHeight="-Infinity" minHeight="-Infinity" onMouseClicked="#reserveButtonOnClick" prefHeight="40.0" prefWidth="180.0" styleClass="hoverable-label" text="  Reservations">
                      <font>
                         <Font name="Tw Cen MT" size="16.0" />
                      </font>
                   </Label>
-                  <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="180.0" styleClass="hoverable-label" text="  Your Payment Methods">
+                  <Label fx:id="newCarButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#registerCarButtonOnClick" prefHeight="40.0" prefWidth="180.0" styleClass="hoverable-label" text="  Add New Vehicle">
                      <font>
                         <Font name="Tw Cen MT" size="16.0" />
                      </font>
                   </Label>
-                  <Label maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="180.0" styleClass="hoverable-label" text="  Settings">
+                  <Label fx:id="paymentMethodButton" maxHeight="-Infinity" minHeight="-Infinity" onMouseClicked="#paymentButtonOnClick" prefHeight="40.0" prefWidth="180.0" styleClass="hoverable-label" text="  Payment Method">
                      <font>
                         <Font name="Tw Cen MT" size="16.0" />
                      </font>
@@ -103,12 +105,7 @@
                         <Font name="Tw Cen MT" size="16.0" />
                      </font>
                   </Label>
-                  <Label maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="180.0" styleClass="hoverable-label" text="  Your Reservations">
-                     <font>
-                        <Font name="Tw Cen MT" size="16.0" />
-                     </font>
-                  </Label>
-                  <Label maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="180.0" styleClass="hoverable-label" text="  Your Cars">
+                  <Label fx:id="logoutButton" maxHeight="-Infinity" minHeight="-Infinity" onMouseClicked="#logoutButtonOnClick" prefHeight="40.0" prefWidth="180.0" styleClass="hoverable-label" text="  Log Out">
                      <font>
                         <Font name="Tw Cen MT" size="16.0" />
                      </font>

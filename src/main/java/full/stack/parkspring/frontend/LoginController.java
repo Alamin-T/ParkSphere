@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import lombok.Setter;
 import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
@@ -16,6 +17,13 @@ import java.util.Optional;
 
 @Controller
 public class LoginController {
+
+    @Setter
+    private Stage loginStage;
+
+    @Setter
+    @FXML
+    private Stage mainStage;
 
     private final UserRepository userRepository;
 
@@ -52,24 +60,22 @@ public class LoginController {
 
         if (optionalUser.isPresent() && optionalUser.get().getPassword().equals(enteredPassword)) {
             try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller_fxml/afterLogin.fxml"));
+                // Load the user's home page
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller_fxml/userHomePage.fxml"));
                 Parent root = fxmlLoader.load();
-                Stage stage = (Stage) LoginButton.getScene().getWindow();
-                stage.setScene(new Scene(root));
-                stage.show();
+
+                // Update the main application stage's scene
+                mainStage.setScene(new Scene(root));
+                mainStage.show();
+
+                // Close the login modal stage
+                if (loginStage != null) {
+                    loginStage.close();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
         } else {
-            invalidLoginMessage.setText("Invalid Login! Please try again.");
-        }
-    }
-
-    // Method to set invalid login message based on user input
-    public void setInvalidLoginMessageOnAction() {
-        if (usernameTextField.getText().isBlank() && passwordTextField.getText().isBlank()) {
-            invalidLoginMessage.setText("Please enter username and password.");
-        } else if (usernameTextField.getText().isBlank() || passwordTextField.getText().isBlank()) {
             invalidLoginMessage.setText("Invalid Login! Please try again.");
         }
     }

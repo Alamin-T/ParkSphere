@@ -13,6 +13,9 @@ import javafx.scene.effect.InnerShadow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
+import javafx.scene.shape.Polyline;
+import javafx.scene.shape.StrokeLineCap;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.springframework.stereotype.Controller;
@@ -30,6 +33,12 @@ public class BookingController {
     private DatePicker datePicker;
 
     @FXML
+    private Label reserveLabel;
+
+    @FXML
+    private Line mBar1, mBar2, mBar3;
+
+    @FXML
     private ProgressBar progressBar;
 
     @FXML
@@ -43,6 +52,12 @@ public class BookingController {
 
     @FXML
     private RadioButton vipRadioButton;
+
+    @FXML
+    private Polyline cancelButton;
+
+    @FXML
+    private Label homeButton;
 
     @FXML
     private VBox slot1, slot2, slot3, slot4, slot5, slot6, slot7, slot8, slot9, slot10, slot11, slot12, slot13, slot14, slot15, slot16, slot17;
@@ -178,9 +193,63 @@ public class BookingController {
         }
     }
 
-    /**
-     * Handles the confirm button click and transitions to the booking summary page.
-     */
+    @FXML
+    public void homeButtonOnClick() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller_fxml/userHomePage.fxml"));
+            Parent root = fxmlLoader.load();
+            Stage stage = (Stage) homeButton.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error loading home page");
+        }
+    }
+
+    @FXML
+    public void onLabelHoverHome() {
+        homeButton.setStyle("-fx-font-size: 15.4px; -fx-text-fill: #000ea8; -fx-underline: true; -fx-font-family: 'Tw Cen MT'");
+    }
+
+    @FXML
+    public void onLabelExitHoverHome() {
+        homeButton.setStyle("-fx-font-size: 15px; -fx-text-fill: white; -fx-underline: false; -fx-font-family: 'Tw Cen MT'");
+    }
+
+
+    @FXML
+    public void onLabelHoverReserve() {
+        reserveLabel.setStyle("-fx-font-size: 15.4px; -fx-text-fill: #000ea8; -fx-underline: true; -fx-font-family: 'Tw Cen MT'");
+    }
+
+    @FXML
+    public void onLabelExitHoverReserve() {
+        reserveLabel.setStyle("-fx-font-size: 15px; -fx-text-fill: white; -fx-underline: false; -fx-font-family: 'Tw Cen MT'");
+    }
+
+
+    public void cancelButtonOnAction()  {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller_fxml/userHomePage.fxml"));
+        Parent root = null;
+        try {
+            root = fxmlLoader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Stage stage = (Stage) cancelButton.getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
+    public void onPolylineHover() {
+        cancelButton.setStyle("-fx-stroke: #000ea8; -fx-stroke-width: 4px;");
+    }
+
+    public void onPolylineExit() {
+        cancelButton.setStyle("-fx-stroke: #8589f1; -fx-stroke-width: 2px;");
+    }
+
     @FXML
     public void handleConfirmClick(ActionEvent event) throws IOException {
         String selectedCar = carComboBox.getValue();

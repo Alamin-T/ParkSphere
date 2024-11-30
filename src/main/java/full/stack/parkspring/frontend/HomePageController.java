@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.StrokeLineCap;
@@ -19,82 +20,38 @@ import java.io.IOException;
 public class HomePageController {
 
     @FXML private Button joinUsButton;
-    @FXML private Label homeButton, signInButton, reserveLabel, menuBars,YourCarsButton;
+    @FXML private Label signInButton;
     @FXML private ImageView profileAvatarIcon;
     @FXML private TextField searchBarField;
     @FXML private VBox avatarMenu;
     @FXML private Line mBar1, mBar2, mBar3;
 
     @FXML
-    public void reserveButtonOnClick() {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller_fxml/reserveBooking.fxml"));
-            Parent root = fxmlLoader.load();
-            Stage stage = (Stage) reserveLabel.getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Error loading reserve booking window");
-        }
-    }
-
-    @FXML
-    public void homeButtonOnClick() {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller_fxml/homePage.fxml"));
-            Parent root = fxmlLoader.load();
-            Stage stage = (Stage) homeButton.getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Error loading home page");
-        }
-    }
-
-    @FXML
     public void SignInButtonOnClick() {
         try {
-            // Load the login FXML file
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller_fxml/login.fxml"));
             Parent loginRoot = fxmlLoader.load();
 
             // Initialize the login stage
             Stage loginStage = new Stage();
             loginStage.setTitle("Login");
-
-            Scene loginScene = new Scene(loginRoot);
-            loginStage.setScene(loginScene);
-
-            // Set the login stage modality (blocks interaction with other windows)
+            loginStage.setScene(new Scene(loginRoot));
             loginStage.initModality(javafx.stage.Modality.WINDOW_MODAL);
             loginStage.initOwner(signInButton.getScene().getWindow());
 
-            // Show the login stage and wait for it to close before proceeding
+            // Pass both the login stage and the main application stage
+            LoginController loginController = fxmlLoader.getController();
+            loginController.setLoginStage(loginStage);
+            loginController.setMainStage((Stage) signInButton.getScene().getWindow());
+
+            // Show the login stage and wait for it to close
             loginStage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Error loading login window");
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Unexpected error occurred while opening login stage");
         }
     }
 
-    @FXML
-    public void YourCarsButtonOnClick() {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller_fxml/registerNewCar.fxml"));
-            Parent root = fxmlLoader.load();
-            Stage stage = (Stage) YourCarsButton.getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Error loading home page");
-        }
-    }
+
 
 
     @FXML
@@ -170,15 +127,6 @@ public class HomePageController {
         parallelTransition.play();
     }
 
-    @FXML
-    public void onLabelHoverHome() {
-        homeButton.setStyle("-fx-font-size: 15.4px; -fx-text-fill: #000ea8; -fx-underline: true; -fx-font-family: 'Tw Cen MT'");
-    }
-
-    @FXML
-    public void onLabelExitHoverHome() {
-        homeButton.setStyle("-fx-font-size: 15px; -fx-text-fill: white; -fx-underline: false; -fx-font-family: 'Tw Cen MT'");
-    }
 
     @FXML
     public void onPolylineHover() {
@@ -190,15 +138,6 @@ public class HomePageController {
         setPolylineStyle("white", 2.5);
     }
 
-    @FXML
-    public void onLabelHoverReserve() {
-        reserveLabel.setStyle("-fx-font-size: 15.4px; -fx-text-fill: #000ea8; -fx-underline: true; -fx-font-family: 'Tw Cen MT'");
-    }
-
-    @FXML
-    public void onLabelExitHoverReserve() {
-        reserveLabel.setStyle("-fx-font-size: 15px; -fx-text-fill: white; -fx-underline: false; -fx-font-family: 'Tw Cen MT'");
-    }
 
     private void setMenuBarStyle(String color, double width) {
         mBar1.setStyle("-fx-stroke: " + color + "; -fx-stroke-width: " + width + "px;");

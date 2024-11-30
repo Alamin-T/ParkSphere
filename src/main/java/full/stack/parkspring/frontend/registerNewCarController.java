@@ -273,7 +273,7 @@ public class registerNewCarController {
     @FXML
     public void homeButtonOnClick() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller_fxml/homePage.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller_fxml/userHomePage.fxml"));
             Parent root = fxmlLoader.load();
             Stage stage = (Stage) homeButton.getScene().getWindow();
             stage.setScene(new Scene(root));
