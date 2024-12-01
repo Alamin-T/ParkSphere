@@ -16,9 +16,11 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.StrokeLineCap;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
 
+@Controller
 public class userHomePageController {
 
     @FXML private Label homeButton, reserveLabel, newCarButton, logoutButton;
@@ -26,6 +28,7 @@ public class userHomePageController {
     @FXML private VBox avatarMenu;
     @FXML private Line mBar1, mBar2, mBar3;
     @FXML private Label paymentMethodButton;
+
 
     @FXML
     public void reserveButtonOnClick() {
@@ -89,12 +92,12 @@ public class userHomePageController {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller_fxml/registerNewCar.fxml"));
             Parent root = fxmlLoader.load();
-            Stage stage = (Stage) newCarButton.getScene().getWindow();
+            Stage stage = (Stage) reserveLabel.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Error loading home page");
+            System.out.println("Error loading reserve booking window");
         }
     }
 

@@ -1,6 +1,7 @@
 package full.stack.parkspring.frontend;
 
 import full.stack.parkspring.config.ApplicationContextProvider;
+import full.stack.parkspring.config.UserSession;
 import full.stack.parkspring.model.AppUser;
 import full.stack.parkspring.repository.UserRepository;
 import javafx.fxml.FXML;
@@ -55,20 +56,19 @@ public class LoginController {
         String enteredEmail = usernameTextField.getText().trim();
         String enteredPassword = passwordTextField.getText().trim();
 
-        // Fetch user from the database
         Optional<AppUser> optionalUser = userRepository.findByEmail(enteredEmail.toLowerCase());
 
         if (optionalUser.isPresent() && optionalUser.get().getPassword().equals(enteredPassword)) {
+            AppUser loggedInUser = optionalUser.get();
+            UserSession.getInstance().setLoggedInUser(loggedInUser); // Set the user in the session
+
             try {
-                // Load the user's home page
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller_fxml/userHomePage.fxml"));
                 Parent root = fxmlLoader.load();
 
-                // Update the main application stage's scene
                 mainStage.setScene(new Scene(root));
                 mainStage.show();
 
-                // Close the login modal stage
                 if (loginStage != null) {
                     loginStage.close();
                 }
@@ -79,6 +79,7 @@ public class LoginController {
             invalidLoginMessage.setText("Invalid Login! Please try again.");
         }
     }
+
 
     // Methods for handling hover and click events for the "Register" label
     @FXML

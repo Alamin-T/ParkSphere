@@ -2,7 +2,6 @@ package full.stack.parkspring.repository;
 
 import full.stack.parkspring.model.Gender;
 import full.stack.parkspring.model.AppUser;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

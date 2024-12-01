@@ -5,10 +5,11 @@ import javafx.application.Application;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.context.annotation.ComponentScan;
 
 
-@EntityScan(basePackages = "full.stack.parkspring")
 @SpringBootApplication
+@EntityScan(basePackages = "full.stack.parkspring")
 public class ParkSpringApplication {
 
     public static void main(String[] args) {

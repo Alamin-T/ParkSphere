@@ -1,16 +1,22 @@
 
 package full.stack.parkspring.frontend;
+import full.stack.parkspring.config.SpringFXMLLoader;
+import full.stack.parkspring.config.UserSession;
+import full.stack.parkspring.model.AppUser;
 import full.stack.parkspring.model.LicenseClass;
 import full.stack.parkspring.model.PowerType;
 import full.stack.parkspring.model.Vehicle;
 import full.stack.parkspring.repository.UserRepository;
 import full.stack.parkspring.repository.VehicleRepository;
+import full.stack.parkspring.service.VehicleService;
+import jakarta.transaction.Transactional;
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
 import javafx.animation.ParallelTransition;
 import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -24,15 +30,23 @@ import javafx.scene.shape.StrokeLineCap;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.RadioButton;
-
-
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import java.io.IOException;
+import java.util.List;
 
-
-@Controller
+@Service
+@Transactional
+@RestController
+@RequestMapping("/api/vehicles")
 public class registerNewCarController {
 
     @FXML
@@ -98,12 +112,29 @@ public class registerNewCarController {
     @FXML
     private RadioButton hybridRadioButton;
 
-
+    @Autowired
+    private SpringFXMLLoader springFXMLLoader;
 
     @Autowired
-    private UserRepository userRepository;
+    private VehicleService vehicleService;
+
+    @PostMapping("/register")
+    public ResponseEntity<String> registerVehicle(@RequestBody Vehicle vehicle) {
+        vehicleService.registerVehicle(vehicle);
+        return ResponseEntity.ok("Vehicle registered successfully");
+    }
+
+   /* private final UserRepository userRepository;
+
+    private final VehicleRepository vehicleRepository;
+
     @Autowired
-    private VehicleRepository vehicleRepository;
+    public registerNewCarController(UserRepository userRepository, VehicleRepository vehicleRepository) {
+        this.userRepository = userRepository;
+        this.vehicleRepository = vehicleRepository;
+    }
+    */
+
 
 
 
@@ -137,78 +168,6 @@ public class registerNewCarController {
 /*
     @FXML
     public void onRegisterButtonClick() {
-        // Get the data from text fields
-        String carModel = CarModelField.getText();
-        String licenseNumber = LicenseNumberField.getText();
-        String licensePlate = LicensePlateField.getText();
-        String ownerName = NameField.getText();
-        String licenseClass = LicenseClassComboBox.getValue(); // Get the license class from ComboBox
-        String color = ColorField.getText();
-
-        // Debugging: Print field values
-        System.out.println("Debug: Car Model = " + carModel);
-        System.out.println("Debug: License Number = " + licenseNumber);
-        System.out.println("Debug: License Plate = " + licensePlate);
-        System.out.println("Debug: Owner Name = " + ownerName);
-        System.out.println("Debug: License Class = " + licenseClass);
-        System.out.println("Debug: Color = " + color);
-
-
-        RadioButton selectedRadioButton = (RadioButton) powerTypeToggleGroup.getSelectedToggle();
-        if (selectedRadioButton == null) {
-            showAlert("Error", "Please select a Power Type!");
-            return;
-        }
-        String selectedPowerTypeText = selectedRadioButton.getText();
-
-
-        System.out.println("Debug: Selected Power Type = " + selectedPowerTypeText);
-
-
-        if (carModel.isEmpty() || licensePlate.isEmpty() || ownerName.isEmpty() || licenseClass == null) {
-            showAlert("Error", "All fields must be filled!");
-            return;
-        }
-
-        try {
-            PowerType powerType = PowerType.fromDisplayName(selectedPowerTypeText);
-
-
-            System.out.println("Debug: Parsed PowerType = " + powerType);
-
-            LicenseClass licenseClassEnum = LicenseClass.valueOf(licenseClass.toUpperCase());
-
-
-            System.out.println("Debug: Parsed LicenseClass = " + licenseClassEnum);
-
-            Vehicle vehicle = Vehicle.builder()
-                    .plate(licensePlate)
-                    .licenseNumber(licenseNumber)
-                    .powerType(powerType)
-                    .licenseClass(licenseClassEnum)
-                    .color(color)
-                    .build();
-
-
-            vehicleRepository.save(vehicle);
-            System.out.println("Debug: Built Vehicle = " + vehicle);
-
-
-
-
-            showAlert("Success", "Vehicle registered successfully!");
-        } catch (IllegalArgumentException e) {
-            System.err.println("Error: " + e.getMessage());
-            showAlert("Error", "Invalid License Class or Power Type!");
-        }
-    }
-
-*/
-
-
-    @FXML
-    public void onRegisterButtonClick() {
-
         String carModel = CarModelField.getText();
         String licenseNumber = LicenseNumberField.getText();
         String licensePlate = LicensePlateField.getText();
@@ -224,7 +183,6 @@ public class registerNewCarController {
         }
         String selectedPowerTypeText = selectedRadioButton.getText();
 
-
         if (carModel.isEmpty() || licensePlate.isEmpty() || ownerName.isEmpty() || licenseClass == null) {
             showAlert("Error", "All fields must be filled!");
             return;
@@ -233,14 +191,22 @@ public class registerNewCarController {
         try {
             PowerType powerType = PowerType.fromDisplayName(selectedPowerTypeText);
 
+            // Retrieve the logged-in user from the session
+            AppUser loggedInUser = UserSession.getInstance().getLoggedInUser();
+
+            if (loggedInUser == null) {
+                showAlert("Error", "No logged-in user found. Please log in again.");
+                return;
+            }
+
             Vehicle vehicle = Vehicle.builder()
                     .plate(licensePlate)
-                    .licenseNumber(licenseNumber) // Add license number to Vehicle object
+                    .licenseNumber(licenseNumber)
                     .powerType(powerType)
                     .licenseClass(LicenseClass.valueOf(licenseClass.toUpperCase()))
                     .color(color)
+                    .user(loggedInUser) // Associate the vehicle with the logged-in user
                     .build();
-
 
             // Save the vehicle to the database
             vehicleRepository.save(vehicle);
@@ -251,6 +217,72 @@ public class registerNewCarController {
             showAlert("Error", "Invalid License Class or Power Type!");
         }
     }
+*/
+
+    @FXML
+    public void onRegisterButtonClick(ActionEvent event) {
+        // Get the logged-in user from the session
+        AppUser loggedInUser = UserSession.getLoggedInUser();
+
+        if (loggedInUser == null) {
+            showAlert("Error", "No user is logged in. Please log in to register a car.");
+            return;
+        }
+
+        try {
+            // Gather and validate inputs
+            String carModel = CarModelField.getText();
+            String licensePlate = LicensePlateField.getText();
+            String licenseNumber = LicenseNumberField.getText();
+            String color = ColorField.getText();
+            String selectedLicenseClass = LicenseClassComboBox.getValue();
+            RadioButton selectedPowerTypeRadioButton = (RadioButton) powerTypeToggleGroup.getSelectedToggle();
+
+            if (carModel.isEmpty() || licensePlate.isEmpty() || licenseNumber.isEmpty() ||
+                    color.isEmpty() || selectedLicenseClass == null || selectedPowerTypeRadioButton == null) {
+                showAlert("Error", "All fields are required.");
+                return;
+            }
+
+            // Map input values to enums
+            LicenseClass licenseClass = LicenseClass.valueOf(selectedLicenseClass.toUpperCase()); // Ensure enum matches input
+            PowerType powerType = PowerType.valueOf(selectedPowerTypeRadioButton.getText().toUpperCase());
+
+            // Build the Vehicle object
+            Vehicle vehicle = Vehicle.builder()
+                    .model(carModel)
+                    .plate(licensePlate)
+                    .licenseNumber(licenseNumber)
+                    .color(color)
+                    .licenseClass(licenseClass)
+                    .powerType(powerType)
+                    .user(loggedInUser)
+                    .build();
+
+            // Register the vehicle
+            vehicleService.registerVehicle(vehicle);
+
+            // Show success message
+            showAlert("Success", "Vehicle registered successfully!");
+
+            // Clear fields after successful registration
+            CarModelField.clear();
+            LicensePlateField.clear();
+            LicenseNumberField.clear();
+            ColorField.clear();
+            LicenseClassComboBox.setValue(null);
+            powerTypeToggleGroup.selectToggle(null);
+
+        } catch (IllegalArgumentException e) {
+            showAlert("Error", "Invalid license class or power type: " + e.getMessage());
+        } catch (Exception e) {
+            showAlert("Error", "An error occurred while registering the vehicle: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+
+
 
 
 
