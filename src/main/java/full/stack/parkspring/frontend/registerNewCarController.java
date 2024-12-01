@@ -8,8 +8,6 @@ import full.stack.parkspring.model.PowerType;
 import full.stack.parkspring.model.Vehicle;
 import full.stack.parkspring.repository.UserRepository;
 import full.stack.parkspring.repository.VehicleRepository;
-import full.stack.parkspring.service.VehicleService;
-import jakarta.transaction.Transactional;
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
 import javafx.animation.ParallelTransition;
@@ -34,19 +32,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.RadioButton;
-import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import java.io.IOException;
-import java.util.List;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.RestTemplate;
 
-@Service
-@Transactional
-@RestController
-@RequestMapping("/api/vehicles")
+import java.io.IOException;
+
+
+
+@Controller
 public class registerNewCarController {
 
     @FXML
@@ -113,27 +107,12 @@ public class registerNewCarController {
     private RadioButton hybridRadioButton;
 
     @Autowired
-    private SpringFXMLLoader springFXMLLoader;
+    private UserRepository userRepository;
 
     @Autowired
-    private VehicleService vehicleService;
+    private VehicleRepository vehicleRepository;
 
-    @PostMapping("/register")
-    public ResponseEntity<String> registerVehicle(@RequestBody Vehicle vehicle) {
-        vehicleService.registerVehicle(vehicle);
-        return ResponseEntity.ok("Vehicle registered successfully");
-    }
 
-   /* private final UserRepository userRepository;
-
-    private final VehicleRepository vehicleRepository;
-
-    @Autowired
-    public registerNewCarController(UserRepository userRepository, VehicleRepository vehicleRepository) {
-        this.userRepository = userRepository;
-        this.vehicleRepository = vehicleRepository;
-    }
-    */
 
 
 
@@ -221,32 +200,33 @@ public class registerNewCarController {
 
     @FXML
     public void onRegisterButtonClick(ActionEvent event) {
-        // Get the logged-in user from the session
-        AppUser loggedInUser = UserSession.getLoggedInUser();
+        // Get the logged-in user
+        AppUser user = UserSession.getInstance().getLoggedInUser();
 
-        if (loggedInUser == null) {
+        if (user == null) {
             showAlert("Error", "No user is logged in. Please log in to register a car.");
             return;
         }
 
         try {
-            // Gather and validate inputs
-            String carModel = CarModelField.getText();
-            String licensePlate = LicensePlateField.getText();
-            String licenseNumber = LicenseNumberField.getText();
-            String color = ColorField.getText();
+            // Gather inputs
+            String carModel = CarModelField.getText().trim();
+            String licensePlate = LicensePlateField.getText().trim();
+            String licenseNumber = LicenseNumberField.getText().trim();
+            String color = ColorField.getText().trim();
             String selectedLicenseClass = LicenseClassComboBox.getValue();
             RadioButton selectedPowerTypeRadioButton = (RadioButton) powerTypeToggleGroup.getSelectedToggle();
 
-            if (carModel.isEmpty() || licensePlate.isEmpty() || licenseNumber.isEmpty() ||
-                    color.isEmpty() || selectedLicenseClass == null || selectedPowerTypeRadioButton == null) {
-                showAlert("Error", "All fields are required.");
+            // Validate inputs
+            if (carModel.isEmpty() || licensePlate.isEmpty() || licenseNumber.isEmpty() || color.isEmpty() ||
+                    selectedLicenseClass == null || selectedPowerTypeRadioButton == null) {
+                showAlert("Error", "All fields are required!");
                 return;
             }
 
-            // Map input values to enums
-            LicenseClass licenseClass = LicenseClass.valueOf(selectedLicenseClass.toUpperCase()); // Ensure enum matches input
-            PowerType powerType = PowerType.valueOf(selectedPowerTypeRadioButton.getText().toUpperCase());
+            // Map inputs to enums
+            LicenseClass licenseClass = LicenseClass.fromDisplayName(selectedLicenseClass);
+            PowerType powerType = PowerType.fromDisplayName(selectedPowerTypeRadioButton.getText());
 
             // Build the Vehicle object
             Vehicle vehicle = Vehicle.builder()
@@ -256,16 +236,24 @@ public class registerNewCarController {
                     .color(color)
                     .licenseClass(licenseClass)
                     .powerType(powerType)
-                    .user(loggedInUser)
+                    .user(user)
                     .build();
 
-            // Register the vehicle
-            vehicleService.registerVehicle(vehicle);
+            // Create a RestTemplate for making the API request
+            RestTemplate restTemplate = new RestTemplate();
+            String apiUrl = "http://localhost:8080/api/vehicles/register"; // Replace with your actual API endpoint
 
-            // Show success message
-            showAlert("Success", "Vehicle registered successfully!");
+            // Send the vehicle object to the backend via a POST request
+            ResponseEntity<String> response = restTemplate.postForEntity(apiUrl, vehicle, String.class);
 
-            // Clear fields after successful registration
+            // Handle the response from the API
+            if (response.getStatusCode().is2xxSuccessful()) {
+                showAlert("Success", "Vehicle registered successfully!");
+            } else {
+                showAlert("Error", "Vehicle registration failed: " + response.getBody());
+            }
+
+            // Clear form fields
             CarModelField.clear();
             LicensePlateField.clear();
             LicenseNumberField.clear();
@@ -274,17 +262,12 @@ public class registerNewCarController {
             powerTypeToggleGroup.selectToggle(null);
 
         } catch (IllegalArgumentException e) {
-            showAlert("Error", "Invalid license class or power type: " + e.getMessage());
+            showAlert("Error", "Invalid input: " + e.getMessage());
         } catch (Exception e) {
-            showAlert("Error", "An error occurred while registering the vehicle: " + e.getMessage());
+            showAlert("Error", "An unexpected error occurred: " + e.getMessage());
             e.printStackTrace();
         }
     }
-
-
-
-
-
 
 
 

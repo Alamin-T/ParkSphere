@@ -8,19 +8,17 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
-
-
 @Repository
-public interface VehicleRepository extends JpaRepository<Vehicle, Integer> { // Change Integer to Long
+public interface VehicleRepository extends JpaRepository<Vehicle, Long> { // Change Integer to Long
 
     // Read operations
     Optional<Vehicle> findByPlate(String plate);
 
-    // List vehicles by PowerType (still relevant)
+    // List vehicles by PowerType
     List<Vehicle> findByPowerType(PowerType powerType);
 
     // Delete operations
-    void deleteById(Integer id); // Change Integer to Long if needed
+    void deleteById(Long id); // Changed from Integer to Long, matching the Vehicle entity
     void deleteByPlate(String plate);
 
     // Existence checks

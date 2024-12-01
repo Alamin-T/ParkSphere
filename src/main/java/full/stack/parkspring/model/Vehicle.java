@@ -6,7 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Entity
 @Data  // Lombok will generate getters, setters, toString(), equals(), and hashCode() methods
 @NoArgsConstructor  // Lombok will generate a no-args constructor
@@ -20,22 +19,27 @@ public class Vehicle {
     @GeneratedValue(strategy = GenerationType.IDENTITY)  // Auto-generate the id field
     private Integer id;  // Primary key, auto-generated
 
+    @Column(nullable = false, unique = true)  // Ensure plate number is unique
     private String plate;
+
+    @Column(nullable = false)  // Ensure license number is not null
     private String licenseNumber;
 
     @Enumerated(EnumType.STRING) // Ensure that PowerType is stored as a string in DB
+    @Column(nullable = false)  // Make sure powerType is not null
     private PowerType powerType;
 
-    @Enumerated(EnumType.STRING) // Assuming LicenseClass is an enum
+    @Enumerated(EnumType.STRING) // Ensure that LicenseClass is stored as a string in DB
+    @Column(nullable = false)  // Make sure licenseClass is not null
     private LicenseClass licenseClass;
 
-    private String color;
+    private String color;  // Optional field
 
-    private String model;
+    private String model;  // Optional field
 
     @ManyToOne(fetch = FetchType.EAGER)  // Many vehicles can belong to one user
+    @JoinColumn(name = "user_id", nullable = false)  // Foreign key to AppUser
     private AppUser user;
 
-    // You don't need explicit getters, setters, constructors, or builder methods
-    // because Lombok will generate them for you.
+    // Lombok will generate getters, setters, constructors, and builder methods.
 }
