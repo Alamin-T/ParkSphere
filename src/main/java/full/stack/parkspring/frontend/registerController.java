@@ -55,27 +55,7 @@ registerController {
     @FXML
     private Polyline cancelButton;
 
-    public void onPolylineHover() {
-        cancelButton.setStyle("-fx-stroke: #000ea8; -fx-stroke-width: 4px;");
-    }
 
-    public void onPolylineExit() {
-        cancelButton.setStyle("-fx-stroke: #8589f1; -fx-stroke-width: 2px;");
-    }
-
-
-    public void cancelButtonOnAction()  {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller_fxml/login.fxml"));
-        Parent root = null;
-        try {
-            root = fxmlLoader.load();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        Stage stage = (Stage) cancelButton.getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.show();
-    }
 
     @FXML
     public void setInvalidRegisterMessageOnAction(ActionEvent event) {
@@ -100,7 +80,7 @@ registerController {
 
             AppUser user = new AppUser();
             user.setEmail(email);
-            user.setUsername(firstName + lastName); // Generating a simple username
+            user.setUsername(firstName + lastName);
             user.setPassword(password);
             user.setGender(gender);
 
@@ -116,10 +96,30 @@ registerController {
             }
         } catch (Exception e) {
             invalidLoginMessage.setText("Error occurred during registration.");
-            e.printStackTrace(); // Print stack trace to debug the issue
+            e.printStackTrace();
         }
     }
 
+    public void cancelButtonOnAction()  {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller_fxml/login.fxml"));
+        Parent root = null;
+        try {
+            root = fxmlLoader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Stage stage = (Stage) cancelButton.getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
 
+
+    public void onPolylineHover() {
+        cancelButton.setStyle("-fx-stroke: #000ea8; -fx-stroke-width: 4px;");
+    }
+
+    public void onPolylineExit() {
+        cancelButton.setStyle("-fx-stroke: #8589f1; -fx-stroke-width: 2px;");
+    }
 
 }

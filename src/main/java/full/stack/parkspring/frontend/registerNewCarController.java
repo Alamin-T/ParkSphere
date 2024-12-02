@@ -1,6 +1,5 @@
 
 package full.stack.parkspring.frontend;
-import full.stack.parkspring.config.SpringFXMLLoader;
 import full.stack.parkspring.config.UserSession;
 import full.stack.parkspring.model.AppUser;
 import full.stack.parkspring.model.LicenseClass;
@@ -32,8 +31,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.RadioButton;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
@@ -113,91 +110,7 @@ public class registerNewCarController {
     private VehicleRepository vehicleRepository;
 
 
-
-
-
-
-    @FXML
-    public void initialize() {
-
-        ObservableList<String> licenseClasses = FXCollections.observableArrayList(
-                "Private", "Public/Taxi", "Commercial", "Rental", "Diplomatic", "Emergency/Police"
-        );
-
-        LicenseClassComboBox.setItems(licenseClasses);
-
-        powerTypeToggleGroup = new ToggleGroup();
-        petrolDieselRadioButton.setToggleGroup(powerTypeToggleGroup);
-        electricRadioButton.setToggleGroup(powerTypeToggleGroup);
-        hybridRadioButton.setToggleGroup(powerTypeToggleGroup);
-
-
-        avatarMenu.setVisible(false);
-        for (Node child : avatarMenu.getChildren()) {
-            if (child instanceof Label) {
-                Label label = (Label) child;
-                label.setOnMouseEntered(event -> label.setStyle("-fx-background-color: #9da0f3; -fx-text-fill: #000000;"));
-                label.setOnMouseExited(event -> label.setStyle(""));
-            }
-        }
-
-    }
-
-
-/*
-    @FXML
-    public void onRegisterButtonClick() {
-        String carModel = CarModelField.getText();
-        String licenseNumber = LicenseNumberField.getText();
-        String licensePlate = LicensePlateField.getText();
-        String ownerName = NameField.getText();
-        String licenseClass = LicenseClassComboBox.getValue();
-        String color = ColorField.getText();
-
-        // Get the selected power type from the ToggleGroup
-        RadioButton selectedRadioButton = (RadioButton) powerTypeToggleGroup.getSelectedToggle();
-        if (selectedRadioButton == null) {
-            showAlert("Error", "Please select a Power Type!");
-            return;
-        }
-        String selectedPowerTypeText = selectedRadioButton.getText();
-
-        if (carModel.isEmpty() || licensePlate.isEmpty() || ownerName.isEmpty() || licenseClass == null) {
-            showAlert("Error", "All fields must be filled!");
-            return;
-        }
-
-        try {
-            PowerType powerType = PowerType.fromDisplayName(selectedPowerTypeText);
-
-            // Retrieve the logged-in user from the session
-            AppUser loggedInUser = UserSession.getInstance().getLoggedInUser();
-
-            if (loggedInUser == null) {
-                showAlert("Error", "No logged-in user found. Please log in again.");
-                return;
-            }
-
-            Vehicle vehicle = Vehicle.builder()
-                    .plate(licensePlate)
-                    .licenseNumber(licenseNumber)
-                    .powerType(powerType)
-                    .licenseClass(LicenseClass.valueOf(licenseClass.toUpperCase()))
-                    .color(color)
-                    .user(loggedInUser) // Associate the vehicle with the logged-in user
-                    .build();
-
-            // Save the vehicle to the database
-            vehicleRepository.save(vehicle);
-
-            // Show success alert
-            showAlert("Success", "Vehicle registered successfully!");
-        } catch (IllegalArgumentException e) {
-            showAlert("Error", "Invalid License Class or Power Type!");
-        }
-    }
-*/
-
+                                    // builds and sends Vehicle to DB
     @FXML
     public void onRegisterButtonClick(ActionEvent event) {
         // Get the logged-in user
@@ -239,11 +152,11 @@ public class registerNewCarController {
                     .user(user)
                     .build();
 
-            // Create a RestTemplate for making the API request
+            // Create a RestTemplate for making API
             RestTemplate restTemplate = new RestTemplate();
-            String apiUrl = "http://localhost:8080/api/vehicles/register"; // Replace with your actual API endpoint
+            String apiUrl = "http://localhost:8080/api/vehicles/register";
 
-            // Send the vehicle object to the backend via a POST request
+            // Send the vehicle object to the backend
             ResponseEntity<String> response = restTemplate.postForEntity(apiUrl, vehicle, String.class);
 
             // Handle the response from the API
@@ -268,6 +181,38 @@ public class registerNewCarController {
             e.printStackTrace();
         }
     }
+
+
+
+
+// Button handling and visual effects
+
+    @FXML
+    public void initialize() {
+
+        ObservableList<String> licenseClasses = FXCollections.observableArrayList(
+                "Private", "Public/Taxi", "Commercial", "Rental", "Diplomatic", "Emergency/Police"
+        );
+
+        LicenseClassComboBox.setItems(licenseClasses);
+
+        powerTypeToggleGroup = new ToggleGroup();
+        petrolDieselRadioButton.setToggleGroup(powerTypeToggleGroup);
+        electricRadioButton.setToggleGroup(powerTypeToggleGroup);
+        hybridRadioButton.setToggleGroup(powerTypeToggleGroup);
+
+
+        avatarMenu.setVisible(false);
+        for (Node child : avatarMenu.getChildren()) {
+            if (child instanceof Label) {
+                Label label = (Label) child;
+                label.setOnMouseEntered(event -> label.setStyle("-fx-background-color: #9da0f3; -fx-text-fill: #000000;"));
+                label.setOnMouseExited(event -> label.setStyle(""));
+            }
+        }
+
+    }
+
 
 
 

@@ -16,8 +16,8 @@ import lombok.NoArgsConstructor;
 public class Vehicle {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)  // Auto-generate the id field
-    private Integer id;  // Primary key, auto-generated
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     @Column(nullable = false, unique = true)  // Ensure plate number is unique
     private String plate;
@@ -26,20 +26,20 @@ public class Vehicle {
     private String licenseNumber;
 
     @Enumerated(EnumType.STRING) // Ensure that PowerType is stored as a string in DB
-    @Column(nullable = false)  // Make sure powerType is not null
+    @Column(nullable = false)
     private PowerType powerType;
 
-    @Enumerated(EnumType.STRING) // Ensure that LicenseClass is stored as a string in DB
-    @Column(nullable = false)  // Make sure licenseClass is not null
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private LicenseClass licenseClass;
 
-    private String color;  // Optional field
+    private String color;
 
-    private String model;  // Optional field
+    private String model;
 
     @ManyToOne(fetch = FetchType.EAGER)  // Many vehicles can belong to one user
     @JoinColumn(name = "user_id", nullable = false)  // Foreign key to AppUser
     private AppUser user;
 
-    // Lombok will generate getters, setters, constructors, and builder methods.
+
 }

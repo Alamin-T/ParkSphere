@@ -6,16 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/vehicles")
-public class VehicleController {
+public class VehicleControllerService {
 
     @Autowired
     private VehicleRepository vehicleRepository;
 
-    public VehicleController(VehicleRepository vehicleRepository) {
+    public VehicleControllerService(VehicleRepository vehicleRepository) {
         this.vehicleRepository = vehicleRepository;
     }
 

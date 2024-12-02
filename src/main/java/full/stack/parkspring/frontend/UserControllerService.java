@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/users")
-public class UserController {
+public class UserControllerService {
 
     @Autowired
     private UserRepository userRepository;
@@ -29,7 +29,7 @@ public class UserController {
 
         userRepository.save(user);
 
-        // Return success response
+
         return ResponseEntity.ok("User registered successfully!");
     }
 

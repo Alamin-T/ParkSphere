@@ -18,7 +18,7 @@ import java.util.List;
 public class AppUser {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-generate the id field
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(nullable = false, unique = true) // Ensure email is unique
@@ -31,12 +31,10 @@ public class AppUser {
     private String password;
 
     @Enumerated(EnumType.STRING) // Store gender as a string in the DB
-    @Column(nullable = false) // Make sure gender is not null
-    private Gender gender;
+    @Column(nullable = false)
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL) // One user can have many vehicles
     private List<Vehicle> vehicles;
 
-    // You don't need explicit getters, setters, constructors, or builder methods
-    // because Lombok will generate them for you.
+
 }

@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface VehicleRepository extends JpaRepository<Vehicle, Long> { // Change Integer to Long
+public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
 
     // Read operations
     Optional<Vehicle> findByPlate(String plate);
@@ -18,7 +18,7 @@ public interface VehicleRepository extends JpaRepository<Vehicle, Long> { // Cha
     List<Vehicle> findByPowerType(PowerType powerType);
 
     // Delete operations
-    void deleteById(Long id); // Changed from Integer to Long, matching the Vehicle entity
+    void deleteById(Long id);
     void deleteByPlate(String plate);
 
     // Existence checks

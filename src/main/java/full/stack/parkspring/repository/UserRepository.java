@@ -19,7 +19,7 @@ public interface UserRepository extends JpaRepository<AppUser, Integer> {
     Optional<AppUser> findByEmail(String email);
     Optional<AppUser> findByUsername(String username);
     Optional<AppUser> findByEmailAndUsername(String email, String username);
-    List<AppUser> findAllByGender(Gender gender); // Example: Custom filter by gender.
+    List<AppUser> findAllByGender(Gender gender);
 
     // Delete operations
     void deleteById(Integer id);
