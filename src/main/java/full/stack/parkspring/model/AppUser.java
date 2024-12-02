@@ -32,6 +32,7 @@ public class AppUser {
 
     @Enumerated(EnumType.STRING) // Store gender as a string in the DB
     @Column(nullable = false)
+    private Gender gender;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL) // One user can have many vehicles
     private List<Vehicle> vehicles;

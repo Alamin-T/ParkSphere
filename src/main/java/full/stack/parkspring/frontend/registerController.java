@@ -22,8 +22,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 @Controller
-public class
-registerController {
+public class registerController {
 
     @FXML
     private TextField firstNameField;

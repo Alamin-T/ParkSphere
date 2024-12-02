@@ -9,12 +9,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/vehicles")
-public class VehicleControllerService {
+public class VehicleController {
 
     @Autowired
     private VehicleRepository vehicleRepository;
 
-    public VehicleControllerService(VehicleRepository vehicleRepository) {
+    public VehicleController(VehicleRepository vehicleRepository) {
         this.vehicleRepository = vehicleRepository;
     }
 
