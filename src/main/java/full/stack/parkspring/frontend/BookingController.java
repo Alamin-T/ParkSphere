@@ -21,6 +21,10 @@ import javafx.util.Duration;
 import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 
 @Controller
 public class BookingController {
@@ -60,6 +64,10 @@ public class BookingController {
     private Label homeButton;
 
     @FXML
+    private Map<LocalDate, boolean[]> slotAvailabilityMap = new HashMap<>();
+    private final Random random = new Random();
+
+    @FXML
     private VBox slot1, slot2, slot3, slot4, slot5, slot6, slot7, slot8, slot9, slot10, slot11, slot12, slot13, slot14, slot15, slot16, slot17;
 
     @FXML
@@ -80,6 +88,9 @@ public class BookingController {
      */
     @FXML
     public void initialize() {
+        datePicker.valueProperty().addListener((observable, oldValue, newValue) -> handleDateChange());
+
+
         // Set up the parking type toggle group
         parkingTypeGroup = new ToggleGroup();
         regularRadioButton.setToggleGroup(parkingTypeGroup);
@@ -101,6 +112,34 @@ public class BookingController {
         }
     }
 
+
+    @FXML
+    public void handleDateChange() {
+        LocalDate selectedDate = datePicker.getValue();
+        if (selectedDate != null) {
+            markSlotsRandomlyBasedOnDate(selectedDate);
+        }
+    }
+
+    /**
+     * Randomly marks slots as occupied or available based on the selected date.
+     */
+    private void markSlotsRandomlyBasedOnDate(LocalDate date) {
+        Random random = new Random(date.hashCode()); // Seed based on date for consistency
+
+        for (int i = 0; i < slots.length; i++) {
+            boolean isOccupied = random.nextBoolean(); // Randomly decide if the slot is occupied
+            Label statusLabel = (Label) slots[i].getChildren().get(1); // Assuming statusLabel is the second child
+
+            if (isOccupied) {
+                statusLabel.setText("Occupied");
+                slots[i].setStyle("-fx-background-color: red;");
+            } else {
+                statusLabel.setText("Available");
+                slots[i].setStyle("-fx-background-color: green;");
+            }
+        }
+    }
     /**
      * Applies drop shadow and mouse click handlers to a parking slot.
      */
@@ -292,4 +331,5 @@ public class BookingController {
     public String getSelectedTimeSlot() {
         return selectedTimeSlot;
     }
+
 }

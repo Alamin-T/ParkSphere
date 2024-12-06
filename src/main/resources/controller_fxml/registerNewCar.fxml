@@ -97,11 +97,6 @@
                 <VBox fx:id="avatarMenu" blendMode="SRC_ATOP" layoutX="1155.0" prefHeight="204.0" prefWidth="194.0" style="-fx-padding: 0; -fx-background-color: #f2f2f2;" visible="false">
 
                     <children>
-                        <Label fx:id="signInButton" maxHeight="-Infinity" minHeight="-Infinity" onMouseClicked="#SignInButtonOnClick" prefHeight="40.0" prefWidth="180.0" styleClass="hoverable-label" text="  Sign in">
-                            <font>
-                                <Font name="Tw Cen MT" size="16.0" />
-                            </font>
-                        </Label>
                         <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="180.0" styleClass="hoverable-label" text="  Your Payment Methods">
                             <font>
                                 <Font name="Tw Cen MT" size="16.0" />
@@ -228,9 +223,9 @@
             </Label>
 
 
-                <RadioButton fx:id="petrolDieselRadioButton" layoutX="165.0" layoutY="439.0" mnemonicParsing="false" text="Petrol / Diesel"/>
-                <RadioButton fx:id="electricRadioButton" layoutX="287.0" layoutY="439.0" mnemonicParsing="false" text="Electric"/>
-                <RadioButton fx:id="hybridRadioButton" layoutX="369.0" layoutY="439.0" mnemonicParsing="false" text="Hybrid"/>
+                <RadioButton fx:id="petrolDieselRadioButton" layoutX="165.0" layoutY="439.0" mnemonicParsing="false" text="Petrol / Diesel" />
+                <RadioButton fx:id="electricRadioButton" layoutX="287.0" layoutY="439.0" mnemonicParsing="false" text="Electric" />
+                <RadioButton fx:id="hybridRadioButton" layoutX="369.0" layoutY="439.0" mnemonicParsing="false" text="Hybrid" />
 
 
 
