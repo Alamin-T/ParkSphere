@@ -1,5 +1,8 @@
 package full.stack.parkspring.frontend;
 
+import full.stack.parkspring.config.UserSession;
+import full.stack.parkspring.model.AppUser;
+import full.stack.parkspring.model.Vehicle;
 import javafx.animation.ScaleTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,16 +21,21 @@ import javafx.scene.shape.Polyline;
 import javafx.scene.shape.StrokeLineCap;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 public class BookingController {
+
+    @Autowired
+    private BookingControllerService bookingControllerService;
 
     // UI Components
     @FXML
@@ -64,10 +72,6 @@ public class BookingController {
     private Label homeButton;
 
     @FXML
-    private Map<LocalDate, boolean[]> slotAvailabilityMap = new HashMap<>();
-    private final Random random = new Random();
-
-    @FXML
     private VBox slot1, slot2, slot3, slot4, slot5, slot6, slot7, slot8, slot9, slot10, slot11, slot12, slot13, slot14, slot15, slot16, slot17;
 
     @FXML
@@ -83,11 +87,42 @@ public class BookingController {
     private ToggleGroup parkingTypeGroup;
     private String selectedTimeSlot;
 
+    private void populateCarComboBox() {
+        // Retrieve the logged-in user from the session
+        AppUser loggedInUser = UserSession.getInstance().getLoggedInUser();
+
+        if (loggedInUser != null) {
+            long userId = loggedInUser.getId();
+            fetchVehiclePlates(userId);
+        } else {
+            System.err.println("No user is currently logged in!");
+        }
+    }
+
+    private void fetchVehiclePlates(long userId) {
+        try {
+            RestTemplate restTemplate = new RestTemplate();
+            String url = "http://localhost:8080/api/vehicles/user/" + userId + "/plates";
+            ResponseEntity<String[]> response = restTemplate.getForEntity(url, String[].class);
+
+            if (response.getStatusCode().is2xxSuccessful()) {
+                List<String> licensePlates = Arrays.asList(response.getBody());
+                carComboBox.getItems().addAll(licensePlates);
+            } else {
+                System.err.println("Failed to fetch license plates: " + response.getStatusCode());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("Error fetching license plates.");
+        }
+    }
     /**
      * Initialization method, called after FXML components are loaded.
      */
     @FXML
     public void initialize() {
+
+        populateCarComboBox();
         datePicker.valueProperty().addListener((observable, oldValue, newValue) -> handleDateChange());
 
 
@@ -111,6 +146,8 @@ public class BookingController {
             applyDropShadowAndHandlers(slot, dropShadow);
         }
     }
+
+
 
 
     @FXML

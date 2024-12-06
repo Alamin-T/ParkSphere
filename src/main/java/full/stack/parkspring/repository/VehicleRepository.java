@@ -14,8 +14,9 @@ public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
     // Read operations
     Optional<Vehicle> findByPlate(String plate);
 
-    // List vehicles by PowerType
-    List<Vehicle> findByPowerType(PowerType powerType);
+
+    // Find vehicles by userId
+    List<Vehicle> findByUserId(Long userId); // <-- Add this method
 
     // Delete operations
     void deleteById(Long id);

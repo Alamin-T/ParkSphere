@@ -1,5 +1,6 @@
 package full.stack.parkspring.frontend;
 
+import full.stack.parkspring.config.UserSession;
 import javafx.animation.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -41,7 +42,9 @@ public class userHomePageController {
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Error loading reserve booking window");
+            System.out.println("Loading FXML from: " + getClass().getResource("/controller_fxml/reserveBooking.fxml"));
         }
+
     }
 
     @FXML
@@ -61,6 +64,9 @@ public class userHomePageController {
     @FXML
     public void logoutButtonOnClick() {
         try {
+            // Clear user session
+            UserSession.getInstance().clearSession();
+
             // Load the home page
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller_fxml/homePage.fxml"));
             Parent root = fxmlLoader.load();
@@ -69,7 +75,7 @@ public class userHomePageController {
             stage.show();
 
             // Introduce a delay before showing the alert
-            PauseTransition pause = new PauseTransition(Duration.seconds(0.5)); // 1-second delay
+            PauseTransition pause = new PauseTransition(Duration.seconds(0.4));
             pause.setOnFinished(event -> {
                 // Show logout success message after the delay
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -85,6 +91,7 @@ public class userHomePageController {
             System.out.println("Error loading home page");
         }
     }
+
 
 
     @FXML

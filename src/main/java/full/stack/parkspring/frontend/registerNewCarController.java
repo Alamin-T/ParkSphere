@@ -169,7 +169,6 @@ public class registerNewCarController {
             // Clear form fields
             CarModelField.clear();
             LicensePlateField.clear();
-            LicenseNumberField.clear();
             ColorField.clear();
             LicenseClassComboBox.setValue(null);
             powerTypeToggleGroup.selectToggle(null);
