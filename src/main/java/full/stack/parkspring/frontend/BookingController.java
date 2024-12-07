@@ -71,6 +71,8 @@ public class BookingController {
     @FXML
     private Label homeButton;
 
+
+
     @FXML
     private VBox slot1, slot2, slot3, slot4, slot5, slot6, slot7, slot8, slot9, slot10, slot11, slot12, slot13, slot14, slot15, slot16, slot17;
 
@@ -253,7 +255,7 @@ public class BookingController {
 
             new Thread(() -> {
                 try {
-                    Thread.sleep(1500); // Simulate loading time
+                    Thread.sleep(1000); // Simulate loading time
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -346,6 +348,10 @@ public class BookingController {
         newStage.initModality(javafx.stage.Modality.WINDOW_MODAL);
         newStage.initOwner(((Node) event.getSource()).getScene().getWindow());
         newStage.showAndWait();
+
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.close();
+        cancelButtonOnAction();
     }
 
     /**

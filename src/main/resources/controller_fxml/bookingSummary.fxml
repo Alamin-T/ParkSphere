@@ -35,7 +35,7 @@
                         <Font name="Tw Cen MT Condensed Extra Bold" size="22.0" />
                     </font>
                 </Label>
-                <Button fx:id="reserveButton" layoutX="46.0" layoutY="385.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="362.0" style="-fx-background-radius: 15; -fx-background-color: #8589f1;" text="Reserve now" textFill="WHITE">
+                <Button fx:id="reserveButton" onMouseClicked="#onConfirmButtonClick" layoutX="46.0" layoutY="385.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="362.0" style="-fx-background-radius: 15; -fx-background-color: #8589f1;" text="Reserve now" textFill="WHITE">
                     <font>
                         <Font name="Tw Cen MT Condensed Extra Bold" size="24.0" />
                     </font>

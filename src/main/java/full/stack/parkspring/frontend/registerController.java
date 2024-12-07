@@ -1,7 +1,6 @@
 package full.stack.parkspring.frontend;
 
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import full.stack.parkspring.model.Gender;
 import full.stack.parkspring.model.AppUser;
 import javafx.event.ActionEvent;
@@ -15,11 +14,8 @@ import javafx.stage.Stage;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.client.RestTemplate;
-
+import javafx.scene.control.PasswordField;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 @Controller
 public class registerController {
@@ -34,10 +30,10 @@ public class registerController {
     public TextField emailField;
 
     @FXML
-    public TextField enterPasswordField;
+    public PasswordField enterPasswordField;
 
     @FXML
-    public TextField reEnterPasswordField;
+    public PasswordField reEnterPasswordField;
 
     @FXML
     public RadioButton maleRadioButton;
@@ -79,7 +75,7 @@ public class registerController {
 
             AppUser user = new AppUser();
             user.setEmail(email);
-            user.setUsername(firstName + lastName);
+            user.setUsername(firstName +" "+ lastName);
             user.setPassword(password);
             user.setGender(gender);
 
