@@ -55,7 +55,7 @@ public class BookingControllerTests {
         controller.datePicker = datePicker;
         controller.confirmButton = confirmButton;
         controller.timeSlotScrollPane = timeSlotScrollPane;
-        controller.cancelButton = cancelButton;
+
         controller.reserveLabel = reserveLabel;
         controller.regularRadioButton = regularRadioButton;
         controller.vipRadioButton = vipRadioButton;

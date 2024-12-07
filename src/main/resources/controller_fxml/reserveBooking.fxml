@@ -218,9 +218,9 @@
                 </ScrollPane>
                 <RadioButton fx:id="regularRadioButton" layoutX="186.0" layoutY="280.0" mnemonicParsing="false" text="Regular" />
                 <RadioButton fx:id="vipRadioButton" layoutX="186.0" layoutY="319.0" mnemonicParsing="false" text="VIP " />
-                <Button fx:id="confirmButton" layoutX="587.0" layoutY="525.0" mnemonicParsing="false" onAction="#handleConfirmClick" prefHeight="42.0" prefWidth="177.0" style="-fx-background-radius: 15; -fx-background-radius: 15;" text="Confirm" visible="false">
+                <Button fx:id="confirmButton" layoutX="587.0" layoutY="525.0" mnemonicParsing="false" onAction="#handleConfirmClick" style="-fx-background-color: #8589F1; -fx-background-radius: 8;" textAlignment="CENTER" textFill="WHITE" prefHeight="42.0" prefWidth="177.0"  text="Confirm" visible="false">
                     <font>
-                        <Font size="15.0" />
+                        <Font name="Tw Cen MT Condensed Extra Bold" size="20.0" />
                     </font>
                 </Button>
                 <Label layoutX="795.0" layoutY="138.0" text="When do you want to wheel in?" textFill="#8589f1">

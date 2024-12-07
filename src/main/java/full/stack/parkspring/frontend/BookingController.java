@@ -66,7 +66,7 @@ public class BookingController {
     public RadioButton vipRadioButton;
 
     @FXML
-    public VBox cancelButton;
+    public Polyline cancelButton;
 
     @FXML
     public Label homeButton;
