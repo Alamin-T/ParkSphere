@@ -35,61 +35,61 @@ import java.util.stream.Collectors;
 public class BookingController {
 
     @Autowired
-    private BookingControllerService bookingControllerService;
+    public BookingControllerService bookingControllerService;
 
     // UI Components
     @FXML
-    private ComboBox<String> carComboBox;
+    public ComboBox<String> carComboBox;
 
     @FXML
-    private DatePicker datePicker;
+    public DatePicker datePicker;
 
     @FXML
-    private Label reserveLabel;
+    public Label reserveLabel;
 
     @FXML
-    private Line mBar1, mBar2, mBar3;
+    public Line mBar1, mBar2, mBar3;
 
     @FXML
-    private ProgressBar progressBar;
+    public ProgressBar progressBar;
 
     @FXML
-    private ScrollPane timeSlotScrollPane;
+    public ScrollPane timeSlotScrollPane;
 
     @FXML
-    private Button confirmButton;
+    public Button confirmButton;
 
     @FXML
-    private RadioButton regularRadioButton;
+    public RadioButton regularRadioButton;
 
     @FXML
-    private RadioButton vipRadioButton;
+    public RadioButton vipRadioButton;
 
     @FXML
-    private Polyline cancelButton;
+    public VBox cancelButton;
 
     @FXML
-    private Label homeButton;
+    public Label homeButton;
 
 
 
     @FXML
-    private VBox slot1, slot2, slot3, slot4, slot5, slot6, slot7, slot8, slot9, slot10, slot11, slot12, slot13, slot14, slot15, slot16, slot17;
+    public VBox slot1, slot2, slot3, slot4, slot5, slot6, slot7, slot8, slot9, slot10, slot11, slot12, slot13, slot14, slot15, slot16, slot17;
 
     @FXML
-    private Label statusLabel1, statusLabel2, statusLabel3, statusLabel4, statusLabel5,
+    public Label statusLabel1, statusLabel2, statusLabel3, statusLabel4, statusLabel5,
             statusLabel6, statusLabel7, statusLabel8, statusLabel9, statusLabel10, statusLabel11;
 
     // Variables for managing parking slots
-    private VBox[] slots;
-    private Label[] statusLabels;
-    private VBox selectedSlot;
+    public VBox[] slots;
+    public Label[] statusLabels;
+    public VBox selectedSlot;
 
     // Variables for parking type and time slot selection
-    private ToggleGroup parkingTypeGroup;
-    private String selectedTimeSlot;
+    public ToggleGroup parkingTypeGroup;
+    public String selectedTimeSlot;
 
-    private void populateCarComboBox() {
+    public void populateCarComboBox() {
         // Retrieve the logged-in user from the session
         AppUser loggedInUser = UserSession.getInstance().getLoggedInUser();
 
@@ -101,7 +101,7 @@ public class BookingController {
         }
     }
 
-    private void fetchVehiclePlates(long userId) {
+    public void fetchVehiclePlates(long userId) {
         try {
             RestTemplate restTemplate = new RestTemplate();
             String url = "http://localhost:8080/api/vehicles/user/" + userId + "/plates";
@@ -163,7 +163,7 @@ public class BookingController {
     /**
      * Randomly marks slots as occupied or available based on the selected date.
      */
-    private void markSlotsRandomlyBasedOnDate(LocalDate date) {
+    public void markSlotsRandomlyBasedOnDate(LocalDate date) {
         Random random = new Random(date.hashCode()); // Seed based on date for consistency
 
         for (int i = 0; i < slots.length; i++) {
@@ -194,7 +194,7 @@ public class BookingController {
      * Handles the click event on a parking slot.
      */
     @FXML
-    private void handleClick(MouseEvent event) {
+    public void handleClick(MouseEvent event) {
         VBox clickedSlot = (VBox) event.getSource();
         Label timeSlotLabel = (Label) clickedSlot.getChildren().get(0);
         Label statusLabel = (Label) clickedSlot.getChildren().get(1);
@@ -223,7 +223,7 @@ public class BookingController {
      * Changes the appearance of a selected parking slot.
      */
     @FXML
-    private void changeSlotAppearance(VBox slot) {
+    public void changeSlotAppearance(VBox slot) {
         ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(100), slot);
         scaleTransition.setFromX(1.0);
         scaleTransition.setFromY(1.0);

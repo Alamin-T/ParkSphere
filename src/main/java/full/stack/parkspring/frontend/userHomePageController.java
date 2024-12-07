@@ -24,11 +24,11 @@ import java.io.IOException;
 @Controller
 public class userHomePageController {
 
-    @FXML private Label homeButton, reserveLabel, newCarButton, logoutButton;
-    @FXML private TextField searchBarField;
-    @FXML private VBox avatarMenu;
-    @FXML private Line mBar1, mBar2, mBar3;
-    @FXML private Label paymentMethodButton;
+    @FXML public Label homeButton, reserveLabel, newCarButton, logoutButton;
+    @FXML public TextField searchBarField;
+    @FXML public VBox avatarMenu;
+    @FXML public Line mBar1, mBar2, mBar3;
+    @FXML public Label paymentMethodButton;
 
 
     @FXML

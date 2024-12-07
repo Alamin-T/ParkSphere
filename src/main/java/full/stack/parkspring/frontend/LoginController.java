@@ -20,31 +20,31 @@ import java.util.Optional;
 public class LoginController {
 
     @Setter
-    private Stage loginStage;
+    public Stage loginStage;
 
     @Setter
     @FXML
-    private Stage mainStage;
+    public Stage mainStage;
 
-    private final UserRepository userRepository;
-
-    @FXML
-    private Button LoginButton;
+    public final UserRepository userRepository;
 
     @FXML
-    private Label invalidLoginMessage;
+    public Button LoginButton;
 
     @FXML
-    private PasswordField passwordTextField;
+    public Label invalidLoginMessage;
 
     @FXML
-    private Label registerButton;
+    public PasswordField passwordTextField;
 
     @FXML
-    private Label forgotPasswordButton;
+    public Label registerButton;
 
     @FXML
-    private TextField usernameTextField;
+    public Label forgotPasswordButton;
+
+    @FXML
+    public TextField usernameTextField;
 
     public LoginController() {
         this.userRepository = ApplicationContextProvider.getContext().getBean(UserRepository.class);
@@ -52,7 +52,7 @@ public class LoginController {
 
     // Method to load the after-login page
     @FXML
-    private void loadAfterLoginPage() {
+    public void loadAfterLoginPage() {
         String enteredEmail = usernameTextField.getText().trim();
         String enteredPassword = passwordTextField.getText().trim();
 
