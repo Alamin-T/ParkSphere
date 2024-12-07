@@ -118,6 +118,29 @@ public class BookingController {
             System.err.println("Error fetching license plates.");
         }
     }
+
+  /*  private String fetchCarModelByPlate(String licensePlate) {
+        try {
+            RestTemplate restTemplate = new RestTemplate();
+            String url = "http://localhost:8080/api/vehicles/plate/" + licensePlate;
+            ResponseEntity<Vehicle> response = restTemplate.getForEntity(url, Vehicle.class);
+
+            if (response.getStatusCode().is2xxSuccessful() && response.getBody() != null) {
+                System.out.println("Fetched vehicle model: " + response.getBody().getModel());
+                return response.getBody().getModel();
+            } else {
+                System.err.println("Failed to retrieve vehicle model. Status code: " + response.getStatusCode());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("Error fetching vehicle model.");
+        }
+        return "Unknown Model";
+    }
+
+*/
+
+
     /**
      * Initialization method, called after FXML components are loaded.
      */
@@ -331,10 +354,13 @@ public class BookingController {
     @FXML
     public void handleConfirmClick(ActionEvent event) throws IOException {
         String selectedCar = carComboBox.getValue();
+     //   String model = fetchCarModelByPlate(selectedCar);
         String selectedDate = (datePicker.getValue() != null) ? datePicker.getValue().toString() : "Not selected";
         RadioButton selectedParkingTypeButton = (RadioButton) parkingTypeGroup.getSelectedToggle();
         String selectedParkingType = (selectedParkingTypeButton != null) ? selectedParkingTypeButton.getText() : "Not selected";
         String timeSlot = selectedTimeSlot != null ? selectedTimeSlot : "Not selected";
+
+
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/controller_fxml/bookingSummary.fxml"));
         Parent summaryRoot = loader.load();

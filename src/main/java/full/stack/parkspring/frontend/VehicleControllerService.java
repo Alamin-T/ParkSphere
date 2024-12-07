@@ -43,6 +43,7 @@ public class VehicleControllerService {
     }
 
     // Delete a vehicle by plate
+
     @DeleteMapping("/plate/{plate}")
     public void deleteVehicle(@PathVariable String plate) {
         if (!vehicleRepository.existsByPlate(plate)) {
@@ -59,4 +60,14 @@ public class VehicleControllerService {
                 .collect(Collectors.toList());
         return ResponseEntity.ok(plates);
     }
+
+    @GetMapping("/user/{userId}/models")
+    public ResponseEntity<List<String>> getVehicleModels(@PathVariable long userId) {
+        List<Vehicle> vehicles = vehicleRepository.findByUserId(userId);
+        List<String> models = vehicles.stream()
+                .map(Vehicle::getModel) // Ensure the `Vehicle` entity has a `getModel` method
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(models);
+    }
+
 }

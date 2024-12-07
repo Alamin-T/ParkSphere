@@ -108,12 +108,12 @@ public class LoginController {
     // Methods for handling hover and click events for the "Forgot Password" label
     @FXML
     public void onLabelHoverForgot() {
-        forgotPasswordButton.setStyle("-fx-font-size: 13.4px; -fx-text-fill: #000ea8; -fx-underline: true; -fx-font-family: 'Tw Cen MT'");
+        forgotPasswordButton.setStyle("-fx-font-size: 15.4px; -fx-text-fill: #000ea8; -fx-underline: true; -fx-font-family: 'Tw Cen MT'");
     }
 
     @FXML
     public void onLabelExitForgot() {
-        forgotPasswordButton.setStyle("-fx-font-size: 13px; -fx-text-fill: #868cf2; -fx-underline: false; -fx-font-family: 'Tw Cen MT'");
+        forgotPasswordButton.setStyle("-fx-font-size: 15px; -fx-text-fill: #868cf2; -fx-underline: false; -fx-font-family: 'Tw Cen MT'");
     }
 
     @FXML

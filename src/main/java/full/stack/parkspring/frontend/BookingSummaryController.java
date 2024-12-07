@@ -1,5 +1,6 @@
 package full.stack.parkspring.frontend;
 
+import full.stack.parkspring.model.Vehicle;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -11,7 +12,9 @@ import javafx.scene.Parent;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 
@@ -33,19 +36,20 @@ public class BookingSummaryController {
     @FXML
     private Label timeSlotLabel;
 
+    @FXML
+    private Label modelLabel;
 
-    // Setters for summary details
-    public void setTimeSlot(String timeSlot) {
-        timeSlotLabel.setText(timeSlot);
-    }
+
 
     public void setSummaryDetails(String car, String parkingType, String date, String timeSlot) {
         carLabel.setText(car);
         parkingTypeLabel.setText(parkingType);
         dateLabel.setText(date);
         timeSlotLabel.setText(timeSlot);
+     //   modelLabel.setText(model);
 
     }
+
 
     // Handle confirm button click
     @FXML

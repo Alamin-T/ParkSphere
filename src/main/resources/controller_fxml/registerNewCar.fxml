@@ -13,10 +13,9 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.shape.Circle?>
-<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Polyline?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="759.0" prefWidth="1350.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="full.stack.parkspring.frontend.registerNewCarController">
@@ -37,7 +36,7 @@
                         <Font name="Tw Cen MT" size="15.0" />
                     </font>
                 </Label>
-                <Label layoutX="339.0" layoutY="52.0" text="Contact us" textFill="WHITE">
+                <Label fx:id="contactLabel" layoutX="259.0" layoutY="52.0" text="Contact us" textFill="WHITE">
                     <font>
                         <Font name="Tw Cen MT" size="15.0" />
                     </font>
@@ -56,34 +55,21 @@
                         </InnerShadow>
                     </effect>
                 </Circle>
-                <TextField fx:id="searchBarField" alignment="CENTER" layoutX="827.0" layoutY="36.0" prefHeight="48.0" prefWidth="355.0" promptText="Search" style="-fx-background-color: white; -fx-background-radius: 30; -fx-padding: 5 30 5 50;">
+                <TextField fx:id="searchBarField" alignment="CENTER" layoutX="827.0" layoutY="36.0" prefHeight="48.0" prefWidth="407.0" promptText="Search" style="-fx-background-color: white; -fx-background-radius: 30; -fx-padding: 5 30 5 50;">
                     <font>
                         <Font size="15.0" />
                     </font>
                 </TextField>
-                <ImageView fitHeight="22.0" fitWidth="31.0" layoutX="842.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@/images/search_icon_purple.png" />
-                    </image>
-                </ImageView>
-
-                <!-- Avatar Icon -->
-                <ImageView fx:id="profileAvatarIcon" fitHeight="44.0" fitWidth="46.0" layoutX="1218.0" layoutY="35.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@/images/avatar_icon.png" />
-                    </image>
-                </ImageView>
-
-
-                <Line fx:id="mBar1" endX="-83.0" layoutX="1393.0" layoutY="52.0" startX="-105.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="2.5" />
-                <Line fx:id="mBar2" endX="-83.0" layoutX="1393.0" layoutY="60.0" startX="-105.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="2.5" />
-                <Line fx:id="mBar3" endX="-83.0" layoutX="1393.0" layoutY="68.0" startX="-105.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="2.5" />
-                <Label fx:id="menuBars" layoutX="1280.0" layoutY="42.0" onMouseClicked="#toggleMenu" onMouseEntered="#onPolylineHover" onMouseExited="#onPolylineExit" prefHeight="39.0" prefWidth="39.0" style="-fx-font-size: 16px; -fx-font-family: 'Tw Cen MT';" />
-                <Label fx:id="homeButton1" layoutX="248.0" layoutY="53.0" text="Garage" textFill="WHITE">
-                    <font>
-                        <Font name="Tw Cen MT" size="15.0" />
-                    </font>
-                </Label>
+            <ImageView fitHeight="22.0" fitWidth="31.0" layoutX="842.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/search_icon_purple.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="profileAvatarIcon" fitHeight="44.0" fitWidth="46.0" layoutX="1262.0" layoutY="38.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/avatar_icon.png" />
+               </image>
+            </ImageView>
 
 
             </children>
@@ -92,45 +78,12 @@
    <bottom>
         <AnchorPane minWidth="-Infinity" prefHeight="639.0" prefWidth="1350.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
             <children>
-
-                <!-- VBox Menu (Initially hidden) -->
-                <VBox fx:id="avatarMenu" blendMode="SRC_ATOP" layoutX="1155.0" prefHeight="204.0" prefWidth="194.0" style="-fx-padding: 0; -fx-background-color: #f2f2f2;" visible="false">
-
-                    <children>
-                        <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="180.0" styleClass="hoverable-label" text="  Your Payment Methods">
-                            <font>
-                                <Font name="Tw Cen MT" size="16.0" />
-                            </font>
-                        </Label>
-                        <Label maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="180.0" styleClass="hoverable-label" text="  Settings">
-                            <font>
-                                <Font name="Tw Cen MT" size="16.0" />
-                            </font>
-                        </Label>
-                        <Label maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="180.0" styleClass="hoverable-label" text="  Your Account">
-                            <font>
-                                <Font name="Tw Cen MT" size="16.0" />
-                            </font>
-                        </Label>
-                        <Label maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="180.0" styleClass="hoverable-label" text="  Your Reservations">
-                            <font>
-                                <Font name="Tw Cen MT" size="16.0" />
-                            </font>
-                        </Label>
-                        <Label maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="180.0" styleClass="hoverable-label" text="  Your Cars">
-                            <font>
-                                <Font name="Tw Cen MT" size="16.0" />
-                            </font>
-                        </Label>
-                    </children>
-
-                </VBox>
-                <Label layoutX="176.0" layoutY="86.0" prefHeight="70.0" prefWidth="281.0" text="Register Your Car!" textFill="#8589f1">
+                <Label layoutX="229.0" layoutY="85.0" prefHeight="70.0" prefWidth="281.0" text="Register Your Car!" textFill="#8589f1">
                     <font>
                         <Font name="Tw Cen MT Condensed Extra Bold" size="40.0" />
                     </font>
                 </Label>
-                <ImageView fitHeight="112.0" fitWidth="95.0" layoutX="77.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="112.0" fitWidth="95.0" layoutX="108.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../images/carReg.jpg" />
                     </image>
@@ -200,9 +153,9 @@
                   <Image url="@../images/parking-lot_13320125.png" />
                </image>
             </ImageView>
-                <Button fx:id="RegisterButton" layoutX="250.0" layoutY="491.0" onAction="#onRegisterButtonClick" prefHeight="51.0" prefWidth="269.0" style="     -fx-background-color: linear-gradient(to bottom right, #8A2BE2, #DA70D6); /* Gradient purple */     -fx-border-color: white; /* White border */     -fx-border-radius: 10px;  /* Rounded corners */     -fx-background-radius: 10px; /* Matching background radius */     -fx-border-width: 2px; /* Border thickness */     -fx-text-fill: white; /* White text */     -fx-padding: 5px 15px; /* Adjust button size */     -fx-font-size: 14px; /* Font size */     -fx-font-weight: bold; /* Bold text for elegance */ " text="Register">
+                <Button fx:id="RegisterButton" layoutX="286.0" layoutY="498.0" onAction="#onRegisterButtonClick" prefHeight="45.0" prefWidth="223.0" style="-fx-background-color: #8589F1; -fx-background-radius: 8;" text="Register" textAlignment="CENTER" textFill="WHITE">
                <font>
-                  <Font name="Tw Cen MT Condensed Extra Bold" size="12.0" />
+                  <Font name="Tw Cen MT Condensed Extra Bold" size="20.0" />
                </font></Button>
             <ComboBox fx:id="LicenseClassComboBox" layoutX="571.0" layoutY="388.0" prefHeight="27.0" prefWidth="151.0" promptText="---click to select---" style="-fx-background-color: #8589f1; -fx-background-radius: 10; -fx-alignment: CENTER;">
                <items>
@@ -226,6 +179,8 @@
                 <RadioButton fx:id="petrolDieselRadioButton" layoutX="165.0" layoutY="439.0" mnemonicParsing="false" text="Petrol / Diesel" />
                 <RadioButton fx:id="electricRadioButton" layoutX="287.0" layoutY="439.0" mnemonicParsing="false" text="Electric" />
                 <RadioButton fx:id="hybridRadioButton" layoutX="369.0" layoutY="439.0" mnemonicParsing="false" text="Hybrid" />
+            <Polyline fx:id="cancelButton" fill="#80ff0000" layoutX="125.0" layoutY="143.0" points="-44.0, -21.0, -61.0, -31.0, -51.0, -38.0, -44.0, -44.0" stroke="#8589f1" strokeType="INSIDE" strokeWidth="2.0" />
+            <Label layoutX="58.0" layoutY="96.0" onMouseClicked="#cancelButtonOnAction" onMouseEntered="#onPolylineHover" onMouseExited="#onPolylineExit" prefHeight="30.0" prefWidth="30.0" />
 
 
 

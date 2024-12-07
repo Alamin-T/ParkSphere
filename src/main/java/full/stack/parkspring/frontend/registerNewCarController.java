@@ -23,6 +23,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Polyline;
 import javafx.scene.shape.StrokeLineCap;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -93,6 +94,9 @@ public class registerNewCarController {
 
     @FXML
     private ToggleGroup powerTypeToggleGroup;
+
+    @FXML
+    private Polyline cancelButton;
 
     @FXML
     private RadioButton petrolDieselRadioButton;
@@ -201,14 +205,8 @@ public class registerNewCarController {
         hybridRadioButton.setToggleGroup(powerTypeToggleGroup);
 
 
-        avatarMenu.setVisible(false);
-        for (Node child : avatarMenu.getChildren()) {
-            if (child instanceof Label) {
-                Label label = (Label) child;
-                label.setOnMouseEntered(event -> label.setStyle("-fx-background-color: #9da0f3; -fx-text-fill: #000000;"));
-                label.setOnMouseExited(event -> label.setStyle(""));
-            }
-        }
+
+
 
     }
 
@@ -270,6 +268,27 @@ public class registerNewCarController {
             e.printStackTrace();
             System.out.println("Unexpected error occurred while opening login stage");
         }
+    }
+
+    public void cancelButtonOnAction()  {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller_fxml/userHomePage.fxml"));
+        Parent root = null;
+        try {
+            root = fxmlLoader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Stage stage = (Stage) cancelButton.getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
+    public void onPolylineHover() {
+        cancelButton.setStyle("-fx-stroke: #000ea8; -fx-stroke-width: 4px;");
+    }
+
+    public void onPolylineExit() {
+        cancelButton.setStyle("-fx-stroke: #8589f1; -fx-stroke-width: 2px;");
     }
 
     @FXML
@@ -341,15 +360,7 @@ public class registerNewCarController {
         homeButton.setStyle("-fx-font-size: 15px; -fx-text-fill: white; -fx-underline: false; -fx-font-family: 'Tw Cen MT'");
     }
 
-    @FXML
-    public void onPolylineHover() {
-        setPolylineStyle("#000000", 4);
-    }
 
-    @FXML
-    public void onPolylineExit() {
-        setPolylineStyle("white", 2.5);
-    }
 
     @FXML
     public void onLabelHoverReserve() {
