@@ -121,4 +121,5 @@ public class registerController {
         cancelButton.setStyle("-fx-stroke: #8589f1; -fx-stroke-width: 2px;");
     }
 
+
 }
