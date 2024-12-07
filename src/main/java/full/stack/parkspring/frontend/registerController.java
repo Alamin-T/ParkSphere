@@ -25,34 +25,34 @@ import java.net.URL;
 public class registerController {
 
     @FXML
-    private TextField firstNameField;
+    public TextField firstNameField;
 
     @FXML
-    private TextField lastNameField;
+    public TextField lastNameField;
 
     @FXML
-    private TextField emailField;
+    public TextField emailField;
 
     @FXML
-    private TextField enterPasswordField;
+    public TextField enterPasswordField;
 
     @FXML
-    private TextField reEnterPasswordField;
+    public TextField reEnterPasswordField;
 
     @FXML
-    private RadioButton maleRadioButton;
+    public RadioButton maleRadioButton;
 
     @FXML
-    private RadioButton femaleRadioButton;
+    public RadioButton femaleRadioButton;
 
     @FXML
-    private Label invalidLoginMessage;
+    public Label invalidLoginMessage;
 
     @FXML
-    private Button RegisterButton;
+    public Button RegisterButton;
 
     @FXML
-    private Polyline cancelButton;
+    public Polyline cancelButton;
 
 
 

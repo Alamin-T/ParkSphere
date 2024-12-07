@@ -12,11 +12,12 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
+import javafx.scene.*;
 
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-class registerControllerTests {
+public class registerControllerTests {
 
     @Mock
     private RestTemplate restTemplate;
