@@ -46,6 +46,8 @@ public class userHomePageController {
     @FXML
     private Label labelForParkMap, labelForParkContact, labelForParkRate;
     @FXML
+    private Label headerForParkContact, headerForParkMap, headerForParkRate;
+    @FXML
     private Label tooltipParkGarage, tooltipParkAccount, tooltipParkPayment, tooltipParkReg;
     @FXML
     private Label welcomeLabel;
@@ -216,61 +218,88 @@ public class userHomePageController {
         setupHoverEffect(parkContact, null, 1.15, false);
         // Contact only scales
 
-        setupHoverAnimation(parkMap, labelForParkMap, "Map Details");
-        setupHoverAnimation(parkContact, labelForParkContact, "Contact Info");
-        setupHoverAnimation(parkRate, labelForParkRate, "Rate Information");
+        setupHoverAnimation(parkMap, labelForParkMap, "Downtown Parking Center\nGreenwood Plaza Parking\nSeaside Parking Garage", headerForParkMap, "Our Locations");
+        setupHoverAnimation(parkContact, labelForParkContact, "support@parksphere.com\nPhone: +36 1 846 9420\nFax: +36 1 833 0239", headerForParkContact, "How to contact us");
+        setupHoverAnimation(parkRate, labelForParkRate, "Mon to Thu(7AM-11PM)\n-Reg: $3.00/hr|VIP: $5.00/hr\nFri to Sat(8AM-8PM)\n-Reg: $4.59/hr|VIP: $7.69/hr", headerForParkRate, "Parking fares");
     }
 
+    private void setupHoverAnimation(ImageView imageView, Label regularLabel, String regularLabelText, Label headerLabel, String headerLabelText) {
+        regularLabel.setText(regularLabelText); // Set the regular label text
+        headerLabel.setText(headerLabelText);   // Set the header label text
 
-    private void setupHoverAnimation(ImageView imageView, Label label, String labelText) {
-        label.setText(labelText); // Set the label text
-        label.setVisible(false);  // Initially hide the label
+        regularLabel.setVisible(false);         // Initially hide the regular label
+        headerLabel.setVisible(false);          // Initially hide the header label
 
         imageView.setOnMouseEntered(event -> {
-            label.setVisible(true);
+            regularLabel.setVisible(true);
+            headerLabel.setVisible(true);
 
-            // Translate Transition to slide the label in from the right
-            TranslateTransition slideIn = new TranslateTransition(Duration.millis(300), label);
-            slideIn.setFromX(label.getWidth());
-            slideIn.setToX(0);
+            // Translate Transition for sliding in the regular label from the right
+            TranslateTransition slideInRegular = new TranslateTransition(Duration.millis(300), regularLabel);
+            slideInRegular.setFromX(regularLabel.getWidth());
+            slideInRegular.setToX(0);
 
-            // Fade Transition to fade the label in
-            FadeTransition fadeIn = new FadeTransition(Duration.millis(300), label);
-            fadeIn.setFromValue(0.0);
-            fadeIn.setToValue(1.0);
+            // Translate Transition for sliding in the header label from the right
+            TranslateTransition slideInHeader = new TranslateTransition(Duration.millis(300), headerLabel);
+            slideInHeader.setFromX(headerLabel.getWidth());
+            slideInHeader.setToX(0);
+
+            // Fade Transition to fade in the regular label
+            FadeTransition fadeInRegular = new FadeTransition(Duration.millis(300), regularLabel);
+            fadeInRegular.setFromValue(0.0);
+            fadeInRegular.setToValue(1.0);
+
+            // Fade Transition to fade in the header label
+            FadeTransition fadeInHeader = new FadeTransition(Duration.millis(300), headerLabel);
+            fadeInHeader.setFromValue(0.0);
+            fadeInHeader.setToValue(1.0);
 
             // Scale transition for the image
             ScaleTransition scaleUp = new ScaleTransition(Duration.millis(200), imageView);
             scaleUp.setToX(1.15);
             scaleUp.setToY(1.15);
 
-            ParallelTransition parallelTransition = new ParallelTransition(slideIn, fadeIn, scaleUp);
+            ParallelTransition parallelTransition = new ParallelTransition(slideInRegular, slideInHeader, fadeInRegular, fadeInHeader, scaleUp);
             parallelTransition.setInterpolator(Interpolator.EASE_BOTH);
             parallelTransition.play();
         });
 
         imageView.setOnMouseExited(event -> {
-            // Translate Transition to slide the label out to the right
-            TranslateTransition slideOut = new TranslateTransition(Duration.millis(300), label);
-            slideOut.setFromX(0);
-            slideOut.setToX(label.getWidth());
+            // Translate Transition for sliding out the regular label to the right
+            TranslateTransition slideOutRegular = new TranslateTransition(Duration.millis(300), regularLabel);
+            slideOutRegular.setFromX(0);
+            slideOutRegular.setToX(regularLabel.getWidth());
 
-            // Fade Transition to fade the label out
-            FadeTransition fadeOut = new FadeTransition(Duration.millis(300), label);
-            fadeOut.setFromValue(1.0);
-            fadeOut.setToValue(0.0);
+            // Translate Transition for sliding out the header label to the right
+            TranslateTransition slideOutHeader = new TranslateTransition(Duration.millis(300), headerLabel);
+            slideOutHeader.setFromX(0);
+            slideOutHeader.setToX(headerLabel.getWidth());
+
+            // Fade Transition to fade out the regular label
+            FadeTransition fadeOutRegular = new FadeTransition(Duration.millis(300), regularLabel);
+            fadeOutRegular.setFromValue(1.0);
+            fadeOutRegular.setToValue(0.0);
+
+            // Fade Transition to fade out the header label
+            FadeTransition fadeOutHeader = new FadeTransition(Duration.millis(300), headerLabel);
+            fadeOutHeader.setFromValue(1.0);
+            fadeOutHeader.setToValue(0.0);
 
             // Scale transition to reset the image size
             ScaleTransition scaleDown = new ScaleTransition(Duration.millis(200), imageView);
             scaleDown.setToX(1.0);
             scaleDown.setToY(1.0);
 
-            ParallelTransition parallelTransition = new ParallelTransition(slideOut, fadeOut, scaleDown);
+            ParallelTransition parallelTransition = new ParallelTransition(slideOutRegular, slideOutHeader, fadeOutRegular, fadeOutHeader, scaleDown);
             parallelTransition.setInterpolator(Interpolator.EASE_BOTH);
-            parallelTransition.setOnFinished(e -> label.setVisible(false)); // Hide label after animation
+            parallelTransition.setOnFinished(e -> {
+                regularLabel.setVisible(false);   // Hide regular label after animation
+                headerLabel.setVisible(false);    // Hide header label after animation
+            });
             parallelTransition.play();
         });
     }
+
 
     private void setupHoverEffect(ImageView imageView, Label tooltip, double scaleFactor, boolean showTooltip) {
         // Ensure the tooltip is not null and set its visibility to false initially

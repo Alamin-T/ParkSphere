@@ -12,7 +12,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.shape.Circle?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="759.0" prefWidth="1350.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="full.stack.parkspring.frontend.HomePageController">
@@ -37,7 +36,7 @@
                         </InnerShadow>
                     </effect>
                 </Circle>
-                <TextField fx:id="searchBarField" alignment="CENTER" layoutX="827.0" layoutY="36.0" prefHeight="48.0" prefWidth="355.0" promptText="Search" style="-fx-background-color: white; -fx-background-radius: 30;">
+                <TextField fx:id="searchBarField" alignment="CENTER" layoutX="827.0" layoutY="36.0" prefHeight="48.0" prefWidth="407.0" promptText="Search" style="-fx-background-color: white; -fx-background-radius: 30;">
                     <font>
                         <Font size="15.0" />
                     </font>
@@ -49,17 +48,11 @@
                 </ImageView>
 
                 <!-- Avatar Icon -->
-                <ImageView fx:id="profileAvatarIcon" fitHeight="44.0" fitWidth="46.0" layoutX="1218.0" layoutY="35.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+                <ImageView fx:id="profileAvatarIcon" fitHeight="44.0" fitWidth="46.0" layoutX="1262.0" layoutY="38.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../images/avatar_icon.png" />
                     </image>
                 </ImageView>
-
-
-                <Line fx:id="mBar1" endX="-83.0" layoutX="1393.0" layoutY="52.0" startX="-105.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="2.5" />
-            <Line fx:id="mBar2" endX="-83.0" layoutX="1393.0" layoutY="60.0" startX="-105.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="2.5" />
-            <Line fx:id="mBar3" endX="-83.0" layoutX="1393.0" layoutY="68.0" startX="-105.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="2.5" />
-                <Label fx:id="menuBars" layoutX="1280.0" layoutY="42.0" onMouseClicked="#toggleMenu" onMouseEntered="#onPolylineHover" onMouseExited="#onPolylineExit" prefHeight="39.0" prefWidth="39.0" style="-fx-font-size: 16px; -fx-font-family: 'Tw Cen MT';" />
 
 
             </children>
@@ -68,7 +61,7 @@
    <bottom>
         <AnchorPane minWidth="-Infinity" prefHeight="1306.0" prefWidth="1335.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="330.0" fitWidth="408.0" layoutX="857.0" layoutY="155.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="473.0" fitWidth="505.0" layoutX="789.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/parking_homepage.jpg" />
                </image>
@@ -143,6 +136,11 @@
 
                       </VBox>
             <Button fx:id="joinUsButton" layoutX="78.0" layoutY="400.0" mnemonicParsing="false" onMouseClicked="#SignInButtonOnClick" prefHeight="44.0" prefWidth="167.0" style="-fx-background-color: #8589f1; -fx-background-radius: 20;" text="Join us " textFill="WHITE">
+               <font>
+                  <Font name="Tw Cen MT" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="SignInButton" layoutX="292.0" layoutY="400.0" mnemonicParsing="false" onMouseClicked="#SignInButtonOnClick" prefHeight="44.0" prefWidth="167.0" style="-fx-background-color: white; -fx-border-radius: 20; -fx-border-width: 2; -fx-border-color: #8589f1;" text="Sign In" textFill="#8589f1">
                <font>
                   <Font name="Tw Cen MT" size="18.0" />
                </font>

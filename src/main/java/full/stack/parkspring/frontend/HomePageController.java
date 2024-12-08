@@ -154,4 +154,7 @@ public class HomePageController {
         mBar2.setStyle("-fx-stroke: " + color + "; -fx-stroke-width: " + width + "px;");
         mBar3.setStyle("-fx-stroke: " + color + "; -fx-stroke-width: " + width + "px;");
     }
+
+
+
 }
