@@ -1,6 +1,7 @@
 package full.stack.parkspring.frontend;
 
 import full.stack.parkspring.config.UserSession;
+import full.stack.parkspring.model.AppUser;
 import javafx.animation.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -33,9 +34,9 @@ public class userHomePageController {
     @FXML public Line mBar1, mBar2, mBar3;
     @FXML public Label paymentMethodButton;
     @FXML private ImageView parkAccount, parkContact, parkGarage, parkMap, parkPayment, parkRate, parkReg;
-    @FXML private Label tooltipParkGarage, tooltipParkReg, tooltipParkAccount, tooltipParkPayment, tooltipParkContact, tooltipParkRate, tooltipParkMap;
-    @FXML private StackPane stackParkGarage, stackParkReg, stackParkAccount, stackParkPayment, stackParkRate, stackParkContact, stackParkMap;
-    @FXML private Rectangle overlayParkRate, overlayParkContact, overlayParkMap, overlayParkGarage, overlayParkReg, overlayParkAccount, overlayParkPayment;
+    @FXML private Label tooltipParkGarage, tooltipParkAccount, tooltipParkPayment,tooltipParkReg;
+    @FXML
+    private Label welcomeLabel;
 
 
 
@@ -159,11 +160,20 @@ public class userHomePageController {
     }
 
 
+
     @FXML
     public void initialize() {
-        avatarMenu.setVisible(false);
 
-        // Add hover effect on avatar menu labels
+        AppUser loggedInUser = UserSession.getInstance().getLoggedInUser();
+        if (loggedInUser != null) {
+            String username = loggedInUser.getUsername();
+            welcomeLabel.setText("Welcome, " + username + "!");
+        }
+        else {
+            welcomeLabel.setText("Welcome, Guest!");
+
+        }
+        avatarMenu.setVisible(false);
         for (Node child : avatarMenu.getChildren()) {
             if (child instanceof Label) {
                 Label label = (Label) child;
@@ -172,22 +182,35 @@ public class userHomePageController {
             }
         }
 
-        setupHoverEffect(parkGarage, 1.05);
-        setupHoverEffect(parkReg, 1.1);
-        setupHoverEffect(parkAccount, 1.1);
-        setupHoverEffect(parkPayment, 1.1);
-        setupHoverEffect(parkRate, 1.2);
-        setupHoverEffect(parkContact, 1.2);
-        setupHoverEffect(parkMap, 1.2);
+        // Set hover effects on the images with tooltip visibility toggling for some images
+        setupHoverEffect(parkGarage, tooltipParkGarage, 1.05, true);  // Garage has tooltip
+        setupHoverEffect(parkReg, tooltipParkReg, 1.1, true);         // Registration has tooltip
+        setupHoverEffect(parkAccount, tooltipParkAccount, 1.1, true); // Account has tooltip
+        setupHoverEffect(parkPayment, tooltipParkPayment, 1.1, true); // Payment has tooltip
+
+        // Set hover effects on the images without tooltip visibility toggling for others
+        setupHoverEffect(parkMap, null, 1.15, false);    // Map only scales
+        setupHoverEffect(parkRate, null, 1.15, false);   // Rates only scales
+        setupHoverEffect(parkContact, null, 1.15, false); // Contact only scales
     }
 
-    private void setupHoverEffect(ImageView imageView, double scaleFactor) {
+    private void setupHoverEffect(ImageView imageView, Label tooltip, double scaleFactor, boolean showTooltip) {
+        // Ensure the tooltip is not null and set its visibility to false initially
+        if (showTooltip && tooltip != null) {
+            tooltip.setVisible(false);  // Make sure it's hidden initially
+        }
+
         imageView.setOnMouseEntered(event -> {
             // Scale the image
             ScaleTransition scaleUp = new ScaleTransition(Duration.millis(200), imageView);
             scaleUp.setToX(scaleFactor);
             scaleUp.setToY(scaleFactor);
             scaleUp.play();
+
+            // Show the tooltip when the image is hovered (only if showTooltip is true)
+            if (showTooltip && tooltip != null) {
+                tooltip.setVisible(true); // Show tooltip on hover
+            }
         });
 
         imageView.setOnMouseExited(event -> {
@@ -196,8 +219,14 @@ public class userHomePageController {
             scaleDown.setToX(1.0);
             scaleDown.setToY(1.0);
             scaleDown.play();
+
+            // Hide the tooltip when the hover ends (only if showTooltip is true)
+            if (showTooltip && tooltip != null) {
+                tooltip.setVisible(false); // Hide tooltip when hover ends
+            }
         });
     }
+
 
     @FXML
     private void showMenu() {
