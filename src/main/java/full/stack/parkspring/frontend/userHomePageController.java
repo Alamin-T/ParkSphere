@@ -144,6 +144,20 @@ public class userHomePageController {
     }
 
     @FXML
+    public void yourAccountImage(){
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller_fxml/yourAccount.fxml"));
+            Parent root = fxmlLoader.load();
+            Stage stage = (Stage) parkAccount.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error loading home page");
+        }
+    }
+
+    @FXML
     public void registerCarImage(){
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller_fxml/registerNewCar.fxml"));

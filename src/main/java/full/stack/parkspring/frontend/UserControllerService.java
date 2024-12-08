@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/users")
@@ -34,6 +35,12 @@ public class UserControllerService {
 
 
         return ResponseEntity.ok("User registered successfully!");
+    }
+
+    @GetMapping("/{username}")
+    public ResponseEntity<AppUser> getUserDetails(@PathVariable String username) {
+        Optional<AppUser> user = userRepository.findByUsername(username);
+        return user.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
 
