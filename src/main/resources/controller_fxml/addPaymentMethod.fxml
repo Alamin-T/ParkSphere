@@ -8,69 +8,112 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Polyline?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="535.0" prefWidth="888.0" spacing="20" style="-fx-padding: 30; -fx-background-color: #f4f4f9; -fx-border-color: #ccc; -fx-border-radius: 10; -fx-background-radius: 10;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="full.stack.parkspring.frontend.PaymentController">
-
-    <!-- Title -->
-    <Label style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #333;" text="Add Payment Method">
-        <font>
-            <Font name="Tw Cen MT Bold" size="96.0" />
-        </font></Label>
-
-    <!-- Card Form -->
-    <GridPane alignment="CENTER" hgap="10" style="-fx-padding: 10;" vgap="15">
-        <Label style="-fx-text-fill: #555;" text="Card holder Name:" />
-        <TextField fx:id="cardholderNameField" promptText="John Doe" style="-fx-border-color: #ccc; -fx-border-radius: 5;" GridPane.columnIndex="1" />
-
-        <Label style="-fx-text-fill: #555;" text="Card Number:" GridPane.rowIndex="1" />
-        <TextField fx:id="cardNumberField" promptText="1234 5678 9012 3456" style="-fx-border-color: #ccc; -fx-border-radius: 5;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-
-        <Label style="-fx-text-fill: #555;" text="Card Type:" GridPane.rowIndex="2" />
-        <ComboBox fx:id="cardTypeComboBox" style="-fx-border-color: #ccc; -fx-border-radius: 5;" GridPane.columnIndex="1" GridPane.rowIndex="2">
-            <items>
-                <FXCollections fx:factory="observableArrayList">
-                    <String fx:value="Visa" />
-                    <String fx:value="MasterCard" />
-                    <String fx:value="SZÉP Card" />
-                    <String fx:value="American Express" />
-                </FXCollections>
-            </items>
-        </ComboBox>
-
-        <Label style="-fx-text-fill: #555;" text="Expiration Date (MM/YYYY):" GridPane.rowIndex="3" />
-        <HBox spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="3">
-            <TextField fx:id="expirationMonthField" prefWidth="50" promptText="MM" style="-fx-border-color: #ccc; -fx-border-radius: 5;" />
-            <TextField fx:id="expirationYearField" prefWidth="60" promptText="YYYY" style="-fx-border-color: #ccc; -fx-border-radius: 5;" />
-        </HBox>
-
-        <Label style="-fx-text-fill: #555;" text="CVV:" GridPane.rowIndex="4" />
-        <PasswordField fx:id="cvvField" prefWidth="60" promptText="123" style="-fx-border-color: #ccc; -fx-border-radius: 5;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-
-        <Label alignment="TOP_LEFT" contentDisplay="TOP" style="-fx-text-fill: #555;" text="Billing Address:" GridPane.rowIndex="5" />
-        <TextArea fx:id="billingAddressField" prefHeight="60" prefWidth="200" promptText="Street, City, Postal Code" style="-fx-border-color: #ccc; -fx-border-radius: 5;" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-        <columnConstraints>
-            <ColumnConstraints />
-            <ColumnConstraints />
-        </columnConstraints>
-        <rowConstraints>
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-        </rowConstraints>
-    </GridPane>
-
-    <!-- Buttons -->
-    <HBox alignment="CENTER" spacing="15" style="-fx-padding: 10;">
-        <Button onAction="#handleSavePaymentMethod" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-border-radius: 5; -fx-padding: 10 20;" text="Save Payment Method" />
-        <Button onAction="#handleCancel" style="-fx-background-color: #f44336; -fx-text-fill: white; -fx-border-radius: 5; -fx-padding: 10 20;" text="Cancel" />
-    </HBox>
-</VBox>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="535.0" prefWidth="888.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="full.stack.parkspring.frontend.PaymentController">
+   <left>
+      <AnchorPane prefHeight="553.0" prefWidth="310.0" style="-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #7F86FD, #A074FF, #8366FA);" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="5.0" layoutX="13.0" layoutY="212.0" prefHeight="17.0" prefWidth="274.0" text="Park Sphere" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Tw Cen MT Condensed Extra Bold" size="30.0" />
+               </font>
+            </Label>
+            <Line endX="122.0" layoutX="151.0" layoutY="255.0" startX="-124.0" stroke="WHITE" strokeWidth="2.0" />
+            <Label alignment="CENTER" layoutX="47.0" layoutY="265.0" prefHeight="24.0" prefWidth="207.0" text="we'll look after your ride!" textFill="WHITE">
+               <font>
+                  <Font name="Tw Cen MT" size="17.0" />
+               </font>
+            </Label>
+            <Circle fill="#1f93ff00" layoutX="150.0" layoutY="246.0" radius="109.0" stroke="WHITE" strokeType="INSIDE" />
+            <Circle fill="#fff000" layoutX="87.0" layoutY="161.0" radius="18.0" stroke="#fff9e9" strokeType="INSIDE">
+               <effect>
+                  <InnerShadow blurType="GAUSSIAN" height="41.52" radius="20.9925" width="44.45">
+                     <color>
+                        <Color red="0.43421053886413574" green="0.3966861665248871" blue="0.29349416494369507" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Circle>
+            <Line endX="247.0" endY="8.414129257202148" fill="#ffffff" layoutX="43.0" layoutY="256.0" startX="-1.0" startY="8.414129257202148" stroke="#ffffff5b" strokeWidth="2.0" AnchorPane.topAnchor="263.41412925720215" />
+            <Label layoutX="56.0" layoutY="485.0" text="Copyright (c). All Rights Reserved" textFill="WHITE" />
+         </children>
+      </AnchorPane>
+   </left>
+   <center>
+      <AnchorPane prefHeight="535.0" prefWidth="592.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+         <children>
+            <GridPane alignment="CENTER" hgap="10" layoutX="-1.0" layoutY="123.0" prefHeight="290.0" prefWidth="618.0" style="-fx-padding: 10;" vgap="15">
+               <columnConstraints>
+                  <ColumnConstraints />
+                  <ColumnConstraints />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+               </rowConstraints>
+               <children>
+                  <Label style="-fx-text-fill: #555;" text="Card holder Name:" />
+                  <TextField fx:id="cardholderNameField" promptText="John Doe" style="-fx-border-color: #ccc; -fx-border-radius: 5;" GridPane.columnIndex="1" />
+                  <Label style="-fx-text-fill: #555;" text="Card Number:" GridPane.rowIndex="1" />
+                  <TextField fx:id="cardNumberField" promptText="1234 5678 9012 3456" style="-fx-border-color: #ccc; -fx-border-radius: 5;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label style="-fx-text-fill: #555;" text="Card Type:" GridPane.rowIndex="2" />
+                  <ComboBox fx:id="cardTypeComboBox" style="-fx-border-color: #ccc; -fx-border-radius: 5;" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <items>
+                        <FXCollections fx:factory="observableArrayList">
+                           <String fx:value="Visa" />
+                           <String fx:value="MasterCard" />
+                           <String fx:value="SZÉP Card" />
+                           <String fx:value="American Express" />
+                        </FXCollections>
+                     </items>
+                  </ComboBox>
+                  <Label style="-fx-text-fill: #555;" text="Expiration Date (MM/YYYY):" GridPane.rowIndex="3" />
+                  <HBox spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <children>
+                        <TextField fx:id="expirationMonthField" prefWidth="50" promptText="MM" style="-fx-border-color: #ccc; -fx-border-radius: 5;" />
+                        <TextField fx:id="expirationYearField" prefWidth="60" promptText="YYYY" style="-fx-border-color: #ccc; -fx-border-radius: 5;" />
+                     </children>
+                  </HBox>
+                  <Label style="-fx-text-fill: #555;" text="CVV:" GridPane.rowIndex="4" />
+                  <PasswordField fx:id="cvvField" prefWidth="60" promptText="123" style="-fx-border-color: #ccc; -fx-border-radius: 5;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Label alignment="TOP_LEFT" contentDisplay="TOP" style="-fx-text-fill: #555;" text="Billing Address:" GridPane.rowIndex="5" />
+                  <TextArea fx:id="billingAddressField" prefHeight="60" prefWidth="200" promptText="Street, City, Postal Code" style="-fx-border-color: #ccc; -fx-border-radius: 5;" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+               </children>
+            </GridPane>
+            <HBox alignment="CENTER" layoutX="5.0" layoutY="425.0" prefHeight="57.0" prefWidth="609.0" spacing="15" style="-fx-padding: 10;">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#handleSavePaymentMethod" prefHeight="39.0" prefWidth="110.0" style="-fx-background-color: #8589F1; -fx-background-radius: 8;" text="Register" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Tw Cen MT Condensed Extra Bold" size="15.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="181.0" layoutY="51.0" text="Add a Payment Method" textAlignment="CENTER" textFill="#8e67f8">
+               <effect>
+                  <InnerShadow />
+               </effect>
+               <font>
+                  <Font name="System Italic" size="25.0" />
+               </font>
+            </Label>
+            </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

@@ -3,6 +3,7 @@ package full.stack.parkspring.frontend;
 import full.stack.parkspring.config.UserSession;
 import full.stack.parkspring.model.AppUser;
 import javafx.animation.*;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -28,16 +29,22 @@ import java.io.IOException;
 @Controller
 public class userHomePageController {
 
-    @FXML public Label homeButton, reserveLabel, newCarButton, logoutButton;
-    @FXML public TextField searchBarField;
-    @FXML public VBox avatarMenu;
-    @FXML public Line mBar1, mBar2, mBar3;
-    @FXML public Label paymentMethodButton;
-    @FXML private ImageView parkAccount, parkContact, parkGarage, parkMap, parkPayment, parkRate, parkReg;
-    @FXML private Label tooltipParkGarage, tooltipParkAccount, tooltipParkPayment,tooltipParkReg;
+    @FXML
+    public Label homeButton, reserveLabel, newCarButton, logoutButton;
+    @FXML
+    public TextField searchBarField;
+    @FXML
+    public VBox avatarMenu;
+    @FXML
+    public Line mBar1, mBar2, mBar3;
+    @FXML
+    public Label paymentMethodButton;
+    @FXML
+    private ImageView parkAccount, parkContact, parkGarage, parkMap, parkPayment, parkRate, parkReg;
+    @FXML
+    private Label tooltipParkGarage, tooltipParkAccount, tooltipParkPayment, tooltipParkReg;
     @FXML
     private Label welcomeLabel;
-
 
 
     @FXML
@@ -54,6 +61,20 @@ public class userHomePageController {
             System.out.println("Loading FXML from: " + getClass().getResource("/controller_fxml/reserveBooking.fxml"));
         }
 
+    }
+
+    @FXML
+    public void reserveCarImage(){
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller_fxml/reserveBooking.fxml"));
+            Parent root = fxmlLoader.load();
+            Stage stage = (Stage) parkGarage.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error loading home page");
+        }
     }
 
     @FXML
@@ -102,7 +123,6 @@ public class userHomePageController {
     }
 
 
-
     @FXML
     public void registerCarButtonOnClick() {
         try {
@@ -114,6 +134,20 @@ public class userHomePageController {
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Error loading reserve booking window");
+        }
+    }
+
+    @FXML
+    public void registerCarImage(){
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller_fxml/registerNewCar.fxml"));
+            Parent root = fxmlLoader.load();
+            Stage stage = (Stage) parkReg.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error loading home page");
         }
     }
 
@@ -142,6 +176,7 @@ public class userHomePageController {
             e.printStackTrace();
             System.out.println("Error loading payment page");
         }
+
     }
 
 
@@ -160,7 +195,6 @@ public class userHomePageController {
     }
 
 
-
     @FXML
     public void initialize() {
 
@@ -168,8 +202,7 @@ public class userHomePageController {
         if (loggedInUser != null) {
             String username = loggedInUser.getUsername();
             welcomeLabel.setText("Welcome, " + username + "!");
-        }
-        else {
+        } else {
             welcomeLabel.setText("Welcome, Guest!");
 
         }
@@ -332,4 +365,5 @@ public class userHomePageController {
         mBar2.setStyle("-fx-stroke: " + color + "; -fx-stroke-width: " + width + "px;");
         mBar3.setStyle("-fx-stroke: " + color + "; -fx-stroke-width: " + width + "px;");
     }
+
 }

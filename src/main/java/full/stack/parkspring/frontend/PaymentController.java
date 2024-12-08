@@ -1,6 +1,9 @@
 package full.stack.parkspring.frontend;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
@@ -8,7 +11,11 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.shape.Polyline;
+import javafx.stage.Stage;
 import org.springframework.stereotype.Controller;
+
+import java.io.IOException;
 
 @Controller
 public class PaymentController {
@@ -33,6 +40,9 @@ public class PaymentController {
 
     @FXML
     private TextArea billingAddressField;
+
+    @FXML
+    public Polyline cancelButton;
 
     @FXML
     public void initialize() {
@@ -92,6 +102,13 @@ public class PaymentController {
         if (validateInput(cardholderName, cardNumber, cardType, expirationMonth, expirationYear, cvv)) {
             // Handle the saving of payment information
             showAlert("Payment Method Added", "Your payment method has been successfully added.");
+            cardholderNameField.clear();
+            cardNumberField.clear();
+            cardTypeComboBox.getSelectionModel().clearSelection();
+            expirationMonthField.clear();
+            expirationYearField.clear();
+            cvvField.clear();
+            billingAddressField.clear();
         } else {
             showAlert("Invalid Input", "Please make sure all fields are correctly filled out.");
         }
@@ -105,11 +122,7 @@ public class PaymentController {
         return cardNumber.length() == 16 && expirationMonth.length() == 2 && expirationYear.length() == 4 && cvv.length() == 3;
     }
 
-    @FXML
-    public void handleCancel() {
-        // Handle cancel action (return to previous screen)
-        showAlert("Cancelled", "You have cancelled the process.");
-    }
+
 
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION, message, ButtonType.OK);
