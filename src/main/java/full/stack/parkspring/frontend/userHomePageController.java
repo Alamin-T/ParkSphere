@@ -172,45 +172,32 @@ public class userHomePageController {
             }
         }
 
-        setupHoverEffect(stackParkGarage, parkGarage, tooltipParkGarage, 1.05);
-        setupHoverEffect(stackParkReg, parkReg, tooltipParkReg, 1.1);
-        setupHoverEffect(stackParkAccount, parkAccount, tooltipParkAccount, 1.1);
-        setupHoverEffect(stackParkPayment, parkPayment, tooltipParkPayment, 1.1);
-        setupHoverEffect(stackParkRate, parkRate, tooltipParkRate, 1.15);
-        setupHoverEffect(stackParkContact, parkContact, tooltipParkContact, 1.15);
-        setupHoverEffect(stackParkMap, parkMap, tooltipParkMap, 1.15);
+        setupHoverEffect(parkGarage, 1.05);
+        setupHoverEffect(parkReg, 1.1);
+        setupHoverEffect(parkAccount, 1.1);
+        setupHoverEffect(parkPayment, 1.1);
+        setupHoverEffect(parkRate, 1.2);
+        setupHoverEffect(parkContact, 1.2);
+        setupHoverEffect(parkMap, 1.2);
     }
 
-    private void setupHoverEffect(StackPane stackPane, ImageView imageView, Label tooltip, double scaleFactor) {
-        // Set initial styles for tooltip
-        tooltip.setVisible(false);
-
-        stackPane.setOnMouseEntered(event -> {
+    private void setupHoverEffect(ImageView imageView, double scaleFactor) {
+        imageView.setOnMouseEntered(event -> {
             // Scale the image
             ScaleTransition scaleUp = new ScaleTransition(Duration.millis(200), imageView);
             scaleUp.setToX(scaleFactor);
             scaleUp.setToY(scaleFactor);
             scaleUp.play();
-
-            // Show the tooltip
-            tooltip.setVisible(true);
         });
 
-        stackPane.setOnMouseExited(event -> {
+        imageView.setOnMouseExited(event -> {
             // Reset the image scale
             ScaleTransition scaleDown = new ScaleTransition(Duration.millis(200), imageView);
             scaleDown.setToX(1.0);
             scaleDown.setToY(1.0);
             scaleDown.play();
-
-            // Hide the tooltip
-            tooltip.setVisible(false);
         });
     }
-
-
-
-
 
     @FXML
     private void showMenu() {

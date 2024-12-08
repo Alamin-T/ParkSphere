@@ -13,7 +13,6 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="759.0" prefWidth="1350.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="full.stack.parkspring.frontend.userHomePageController">
@@ -64,71 +63,47 @@
    <center>
       <AnchorPane minWidth="-Infinity" prefHeight="1306.0" prefWidth="1335.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
-            <StackPane fx:id="stackParkRate" layoutX="1099.0" layoutY="70.0" prefHeight="150.0" prefWidth="150.0">
-               <ImageView fx:id="parkRate" fitHeight="120.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: black; -fx-border-width: 2px; -fx-border-radius: 10px; -fx-background-radius: 10px;">
-                  <image>
-                     <Image url="@../images/rates.png" />
-                  </image>
-               </ImageView>
-               <Label fx:id="tooltipParkRate" style="-fx-text-fill: white; -fx-font-weight: bold;" text="Rate Info" visible="false" />
-            </StackPane>
+            <ImageView fx:id="parkRate" layoutX="1099.0" layoutY="70.0" fitHeight="120.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: black; -fx-border-width: 2px; -fx-border-radius: 10px; -fx-background-radius: 10px;">
+               <image>
+                  <Image url="@../images/rates.png" />
+               </image>
+            </ImageView>
 
-            <StackPane fx:id="stackParkContact" layoutX="1099.0" layoutY="255.0" prefHeight="150.0" prefWidth="150.0">
-               <ImageView fx:id="parkContact" fitHeight="120.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: black; -fx-border-width: 2px; -fx-border-radius: 10px; -fx-background-radius: 10px;">
-                  <image>
-                     <Image url="@../images/contact.png" />
-                  </image>
-               </ImageView>
-               <Label fx:id="tooltipParkContact" style="-fx-text-fill: white; -fx-font-weight: bold;" text="Contact Info" visible="false" />
-            </StackPane>
+            <ImageView fx:id="parkContact" layoutX="1099.0" layoutY="255.0" fitHeight="120.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: black; -fx-border-width: 2px; -fx-border-radius: 10px; -fx-background-radius: 10px;">
+               <image>
+                  <Image url="@../images/contact.png" />
+               </image>
+            </ImageView>
 
-            <StackPane fx:id="stackParkMap" layoutX="1099.0" layoutY="431.0" prefHeight="150.0" prefWidth="150.0">
-               <ImageView fx:id="parkMap" fitHeight="120.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: black; -fx-border-width: 2px; -fx-border-radius: 10px; -fx-background-radius: 10px;">
-                  <image>
-                     <Image url="@../images/map_location.png" />
-                  </image>
-               </ImageView>
-               <Label fx:id="tooltipParkMap" style="-fx-text-fill: white; -fx-font-weight: bold;" text="Map Info" visible="false" />
-            </StackPane>
+            <ImageView fx:id="parkMap" layoutX="1099.0" layoutY="431.0" fitHeight="120.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: black; -fx-border-width: 2px; -fx-border-radius: 10px; -fx-background-radius: 10px;">
+               <image>
+                  <Image url="@../images/map_location.png" />
+               </image>
+            </ImageView>
 
-            <StackPane fx:id="stackParkGarage" layoutX="53.0" layoutY="130.0">
-               <ImageView fx:id="parkGarage" fitHeight="175.0" fitWidth="956.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@../images/parkZone.png" />
-                  </image>
-               </ImageView>
-               <Label fx:id="tooltipParkGarage" style="-fx-text-fill: white; -fx-font-weight: bold;" text="Garage Info" visible="false" />
-            </StackPane>
+            <ImageView fx:id="parkGarage" layoutX="53.0" layoutY="130.0" fitHeight="175.0" fitWidth="956.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/parkZone.png" />
+               </image>
+            </ImageView>
 
-            <StackPane fx:id="stackParkReg" layoutX="124.0" layoutY="349.0" prefHeight="230.0" prefWidth="230.0">
-               <ImageView fx:id="parkReg" fitHeight="212.0" fitWidth="218.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@../images/registerNewCar.jpg" />
-                  </image>
-               </ImageView>
-               <Label fx:id="tooltipParkReg" style="-fx-text-fill: white; -fx-font-weight: bold;" text="Registration Info" visible="false" />
-            </StackPane>
+            <ImageView fx:id="parkReg" layoutX="124.0" layoutY="349.0" fitHeight="212.0" fitWidth="218.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/registerNewCar.jpg" />
+               </image>
+            </ImageView>
 
-            <StackPane fx:id="stackParkAccount" layoutX="383.0" layoutY="349.0" prefHeight="230.0" prefWidth="230.0">
-               <ImageView fx:id="parkAccount" fitHeight="192.0" fitWidth="211.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@../images/yourAcc.jpg" />
-                  </image>
-               </ImageView>
-               <Label fx:id="tooltipParkAccount" style="-fx-text-fill: white; -fx-font-weight: bold;" text="Account Info" visible="false" />
-            </StackPane>
+            <ImageView fx:id="parkAccount" layoutX="383.0" layoutY="349.0" fitHeight="192.0" fitWidth="211.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/yourAcc.jpg" />
+               </image>
+            </ImageView>
 
-            <StackPane fx:id="stackParkPayment" layoutX="675.0" layoutY="349.0" prefHeight="230.0" prefWidth="230.0">
-               <ImageView fx:id="parkPayment" fitHeight="199.0" fitWidth="224.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@../images/wallet.png" />
-                  </image>
-               </ImageView>
-               <Label fx:id="tooltipParkPayment" style="-fx-text-fill: white; -fx-font-weight: bold;" text="Payment Info" visible="false" />
-            </StackPane>
-
-
-
+            <ImageView fx:id="parkPayment" layoutX="675.0" layoutY="349.0" fitHeight="199.0" fitWidth="224.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/wallet.png" />
+               </image>
+            </ImageView>
 
             <Label layoutX="63.0" layoutY="52.0" textFill="#8589f1">
                <font>
