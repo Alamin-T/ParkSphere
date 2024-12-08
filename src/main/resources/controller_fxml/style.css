@@ -36,3 +36,26 @@
     -fx-background-color: #8589f1; /* Background color on hover */
     -fx-text-fill: white;         /* Text color on hover */
 }
+
+/* Default style for all ImageViews */
+.image-view {
+    -fx-border-color: black;
+    -fx-border-width: 2px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+
+/* Hover effect */
+.image-view:hover {
+    -fx-scale-x: 1.1; /* Scale the width */
+    -fx-scale-y: 1.1; /* Scale the height */
+}
+.tooltip {
+    position: absolute;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+}
+

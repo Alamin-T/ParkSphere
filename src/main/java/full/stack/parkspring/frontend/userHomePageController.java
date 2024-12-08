@@ -12,6 +12,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.StrokeLineCap;
@@ -29,6 +32,11 @@ public class userHomePageController {
     @FXML public VBox avatarMenu;
     @FXML public Line mBar1, mBar2, mBar3;
     @FXML public Label paymentMethodButton;
+    @FXML private ImageView parkAccount, parkContact, parkGarage, parkMap, parkPayment, parkRate, parkReg;
+    @FXML private Label tooltipParkGarage, tooltipParkReg, tooltipParkAccount, tooltipParkPayment, tooltipParkContact, tooltipParkRate, tooltipParkMap;
+    @FXML private StackPane stackParkGarage, stackParkReg, stackParkAccount, stackParkPayment, stackParkRate, stackParkContact, stackParkMap;
+    @FXML private Rectangle overlayParkRate, overlayParkContact, overlayParkMap, overlayParkGarage, overlayParkReg, overlayParkAccount, overlayParkPayment;
+
 
 
     @FXML
@@ -163,7 +171,46 @@ public class userHomePageController {
                 label.setOnMouseExited(event -> label.setStyle(""));
             }
         }
+
+        setupHoverEffect(stackParkGarage, parkGarage, tooltipParkGarage, 1.05);
+        setupHoverEffect(stackParkReg, parkReg, tooltipParkReg, 1.1);
+        setupHoverEffect(stackParkAccount, parkAccount, tooltipParkAccount, 1.1);
+        setupHoverEffect(stackParkPayment, parkPayment, tooltipParkPayment, 1.1);
+        setupHoverEffect(stackParkRate, parkRate, tooltipParkRate, 1.15);
+        setupHoverEffect(stackParkContact, parkContact, tooltipParkContact, 1.15);
+        setupHoverEffect(stackParkMap, parkMap, tooltipParkMap, 1.15);
     }
+
+    private void setupHoverEffect(StackPane stackPane, ImageView imageView, Label tooltip, double scaleFactor) {
+        // Set initial styles for tooltip
+        tooltip.setVisible(false);
+
+        stackPane.setOnMouseEntered(event -> {
+            // Scale the image
+            ScaleTransition scaleUp = new ScaleTransition(Duration.millis(200), imageView);
+            scaleUp.setToX(scaleFactor);
+            scaleUp.setToY(scaleFactor);
+            scaleUp.play();
+
+            // Show the tooltip
+            tooltip.setVisible(true);
+        });
+
+        stackPane.setOnMouseExited(event -> {
+            // Reset the image scale
+            ScaleTransition scaleDown = new ScaleTransition(Duration.millis(200), imageView);
+            scaleDown.setToX(1.0);
+            scaleDown.setToY(1.0);
+            scaleDown.play();
+
+            // Hide the tooltip
+            tooltip.setVisible(false);
+        });
+    }
+
+
+
+
 
     @FXML
     private void showMenu() {
