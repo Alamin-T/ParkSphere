@@ -40,7 +40,11 @@ public class userHomePageController {
     @FXML
     public Label paymentMethodButton;
     @FXML
-    private ImageView parkAccount, parkContact, parkGarage, parkMap, parkPayment, parkRate, parkReg;
+    private ImageView  parkGarage, parkAccount, parkPayment, parkReg;
+    @FXML
+    private ImageView  parkContact, parkRate, parkMap;
+    @FXML
+    private Label labelForParkMap, labelForParkContact, labelForParkRate;
     @FXML
     private Label tooltipParkGarage, tooltipParkAccount, tooltipParkPayment, tooltipParkReg;
     @FXML
@@ -181,27 +185,12 @@ public class userHomePageController {
 
 
     @FXML
-    public void YourCarsButtonOnClick() {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controller_fxml/registerNewCar.fxml"));
-            Parent root = fxmlLoader.load();
-            Stage stage = (Stage) newCarButton.getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Error loading home page");
-        }
-    }
-
-
-    @FXML
     public void initialize() {
 
         AppUser loggedInUser = UserSession.getInstance().getLoggedInUser();
         if (loggedInUser != null) {
             String username = loggedInUser.getUsername();
-            welcomeLabel.setText("Welcome, " + username + "!");
+            welcomeLabel.setText("Welcome " + username + ",");
         } else {
             welcomeLabel.setText("Welcome, Guest!");
 
@@ -224,7 +213,63 @@ public class userHomePageController {
         // Set hover effects on the images without tooltip visibility toggling for others
         setupHoverEffect(parkMap, null, 1.15, false);    // Map only scales
         setupHoverEffect(parkRate, null, 1.15, false);   // Rates only scales
-        setupHoverEffect(parkContact, null, 1.15, false); // Contact only scales
+        setupHoverEffect(parkContact, null, 1.15, false);
+        // Contact only scales
+
+        setupHoverAnimation(parkMap, labelForParkMap, "Map Details");
+        setupHoverAnimation(parkContact, labelForParkContact, "Contact Info");
+        setupHoverAnimation(parkRate, labelForParkRate, "Rate Information");
+    }
+
+
+    private void setupHoverAnimation(ImageView imageView, Label label, String labelText) {
+        label.setText(labelText); // Set the label text
+        label.setVisible(false);  // Initially hide the label
+
+        imageView.setOnMouseEntered(event -> {
+            label.setVisible(true);
+
+            // Translate Transition to slide the label in from the right
+            TranslateTransition slideIn = new TranslateTransition(Duration.millis(300), label);
+            slideIn.setFromX(label.getWidth());
+            slideIn.setToX(0);
+
+            // Fade Transition to fade the label in
+            FadeTransition fadeIn = new FadeTransition(Duration.millis(300), label);
+            fadeIn.setFromValue(0.0);
+            fadeIn.setToValue(1.0);
+
+            // Scale transition for the image
+            ScaleTransition scaleUp = new ScaleTransition(Duration.millis(200), imageView);
+            scaleUp.setToX(1.15);
+            scaleUp.setToY(1.15);
+
+            ParallelTransition parallelTransition = new ParallelTransition(slideIn, fadeIn, scaleUp);
+            parallelTransition.setInterpolator(Interpolator.EASE_BOTH);
+            parallelTransition.play();
+        });
+
+        imageView.setOnMouseExited(event -> {
+            // Translate Transition to slide the label out to the right
+            TranslateTransition slideOut = new TranslateTransition(Duration.millis(300), label);
+            slideOut.setFromX(0);
+            slideOut.setToX(label.getWidth());
+
+            // Fade Transition to fade the label out
+            FadeTransition fadeOut = new FadeTransition(Duration.millis(300), label);
+            fadeOut.setFromValue(1.0);
+            fadeOut.setToValue(0.0);
+
+            // Scale transition to reset the image size
+            ScaleTransition scaleDown = new ScaleTransition(Duration.millis(200), imageView);
+            scaleDown.setToX(1.0);
+            scaleDown.setToY(1.0);
+
+            ParallelTransition parallelTransition = new ParallelTransition(slideOut, fadeOut, scaleDown);
+            parallelTransition.setInterpolator(Interpolator.EASE_BOTH);
+            parallelTransition.setOnFinished(e -> label.setVisible(false)); // Hide label after animation
+            parallelTransition.play();
+        });
     }
 
     private void setupHoverEffect(ImageView imageView, Label tooltip, double scaleFactor, boolean showTooltip) {

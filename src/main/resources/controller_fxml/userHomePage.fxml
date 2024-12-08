@@ -8,6 +8,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.shape.Circle?>
@@ -62,23 +63,32 @@
    <center>
       <AnchorPane minWidth="-Infinity" prefHeight="1306.0" prefWidth="1335.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="parkRate" fitHeight="120.0" fitWidth="130.0" layoutX="1194.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: black; -fx-border-width: 2px; -fx-border-radius: 10px; -fx-background-radius: 10px;">
-               <image>
-                  <Image url="@../images/rates.png" />
-               </image>
-            </ImageView>
+            <HBox layoutX="1013.0" layoutY="70.0" prefHeight="120.0" prefWidth="297.0">
+               <Label fx:id="labelForParkRate" alignment="TOP_LEFT" prefHeight="120.0" prefWidth="174.0" style="-fx-font-size: 16px;" text="Rate Information" textFill="#8589f1" visible="false" />
+               <ImageView fx:id="parkRate" fitHeight="120.0" fitWidth="130.0" layoutX="5.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: black; -fx-border-width: 2px; -fx-border-radius: 10px;">
+                  <image>
+                     <Image url="@../images/rates.png" />
+                  </image>
+               </ImageView>
+            </HBox>
 
-            <ImageView fx:id="parkContact" fitHeight="120.0" fitWidth="130.0" layoutX="1194.0" layoutY="260.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: black; -fx-border-width: 2px; -fx-border-radius: 10px; -fx-background-radius: 10px;">
-               <image>
-                  <Image url="@../images/contact.png" />
-               </image>
-            </ImageView>
+            <HBox layoutX="1013.0" layoutY="260.0" prefWidth="297.0">
+               <Label fx:id="labelForParkContact" alignment="TOP_LEFT" prefHeight="120.0" prefWidth="172.0" style="-fx-font-size: 16px;" text="Contact Info" textFill="#8589f1" visible="false" />
+               <ImageView fx:id="parkContact" fitHeight="120.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: black; -fx-border-width: 2px; -fx-border-radius: 10px;">
+                  <image>
+                     <Image url="@../images/contact.png" />
+                  </image>
+               </ImageView>
+            </HBox>
 
-            <ImageView fx:id="parkMap" fitHeight="120.0" fitWidth="130.0" layoutX="1194.0" layoutY="433.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: black; -fx-border-width: 2px; -fx-border-radius: 10px; -fx-background-radius: 10px;">
-               <image>
-                  <Image url="@../images/map_location.png" />
-               </image>
-            </ImageView>
+            <HBox layoutX="1013.0" layoutY="432.0" prefWidth="297.0">
+               <Label fx:id="labelForParkMap" alignment="TOP_LEFT" layoutY="2.0" prefHeight="120.0" prefWidth="175.0" style="-fx-font-size: 16px;" text="Map Information" textFill="#8589f1" visible="false" />
+               <ImageView fx:id="parkMap" fitHeight="120.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: black; -fx-border-width: 2px; -fx-border-radius: 10px;">
+                  <image>
+                     <Image url="@../images/map_location.png" />
+                  </image>
+               </ImageView>
+            </HBox>
 
             <ImageView fx:id="parkGarage" fitHeight="175.0" fitWidth="956.0" layoutX="53.0" layoutY="130.0" onMouseClicked="#reserveCarImage" pickOnBounds="true" preserveRatio="true">
                <image>
