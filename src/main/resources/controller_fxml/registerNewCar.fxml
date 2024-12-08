@@ -88,34 +88,34 @@
                         <Image url="@../images/carReg.jpg" />
                     </image>
                 </ImageView>
-                <Label layoutX="51.0" layoutY="289.0" text="License Plate:" textFill="#8589f1">
+                <Label layoutX="43.0" layoutY="287.0" text="License Plate:" textFill="#8589f1">
                     <font>
-                        <Font name="Tw Cen MT Bold" size="15.0" />
+                        <Font name="Tw Cen MT Bold" size="20.0" />
                     </font>
                 </Label>
-                <Label layoutX="64.0" layoutY="340.0" text="Car Model:" textFill="#8589f1">
+                <Label layoutX="63.0" layoutY="337.0" text="Car Model:" textFill="#8589f1">
                     <font>
-                        <Font name="Tw Cen MT Bold" size="15.0" />
+                        <Font name="Tw Cen MT Bold" size="20.0" />
                     </font>
                 </Label>
-                <Label layoutX="93.0" layoutY="392.0" text="Color:" textFill="#8589f1">
+                <Label layoutX="101.0" layoutY="390.0" text="Color:" textFill="#8589f1">
                     <font>
-                        <Font name="Tw Cen MT Bold" size="15.0" />
+                        <Font name="Tw Cen MT Bold" size="20.0" />
                     </font>
                 </Label>
-                <Label layoutX="448.0" layoutY="392.0" text="License Class:" textFill="#8589f1">
+                <Label layoutX="445.0" layoutY="390.0" text="License Class:" textFill="#8589f1">
                     <font>
-                        <Font name="Tw Cen MT Bold" size="15.0" />
+                        <Font name="Tw Cen MT Bold" size="20.0" />
                     </font>
                 </Label>
-                <Label layoutX="466.0" layoutY="339.0" text="Full Name:" textFill="#8589f1">
+                <Label layoutX="470.0" layoutY="337.0" text="Full Name:" textFill="#8589f1">
                     <font>
-                        <Font name="Tw Cen MT Bold" size="15.0" />
+                        <Font name="Tw Cen MT Bold" size="20.0" />
                     </font>
                 </Label>
-                <Label layoutX="380.0" layoutY="289.0" text="Driver's License Number:" textFill="#8589f1">
+                <Label layoutX="355.0" layoutY="287.0" text="Driver's License Number:" textFill="#8589f1">
                     <font>
-                        <Font name="Tw Cen MT Bold" size="15.0" />
+                        <Font name="Tw Cen MT Bold" size="20.0" />
                     </font>
                 </Label>
                 <Label layoutX="473.0" layoutY="225.0" text="Driver's Details" textFill="#8589f1">
@@ -171,14 +171,23 @@
             </ComboBox>
             <Label layoutX="51.0" layoutY="438.0" text="Power Type:" textFill="#8589f1">
                <font>
-                  <Font name="Tw Cen MT Bold" size="15.0" />
+                  <Font name="Tw Cen MT Bold" size="20.0" />
                </font>
             </Label>
 
 
-                <RadioButton fx:id="petrolDieselRadioButton" layoutX="165.0" layoutY="439.0" mnemonicParsing="false" text="Petrol / Diesel" />
-                <RadioButton fx:id="electricRadioButton" layoutX="287.0" layoutY="439.0" mnemonicParsing="false" text="Electric" />
-                <RadioButton fx:id="hybridRadioButton" layoutX="369.0" layoutY="439.0" mnemonicParsing="false" text="Hybrid" />
+                <RadioButton fx:id="petrolDieselRadioButton" layoutX="165.0" layoutY="439.0" mnemonicParsing="false" text="Petrol / Diesel">
+               <font>
+                  <Font name="Tw Cen MT" size="17.0" />
+               </font></RadioButton>
+                <RadioButton fx:id="electricRadioButton" layoutX="316.0" layoutY="438.0" mnemonicParsing="false" text="Electric">
+               <font>
+                  <Font name="Tw Cen MT" size="17.0" />
+               </font></RadioButton>
+                <RadioButton fx:id="hybridRadioButton" layoutX="420.0" layoutY="439.0" mnemonicParsing="false" text="Hybrid">
+               <font>
+                  <Font name="Tw Cen MT" size="17.0" />
+               </font></RadioButton>
             <Polyline fx:id="cancelButton" fill="#80ff0000" layoutX="125.0" layoutY="143.0" points="-44.0, -21.0, -61.0, -31.0, -51.0, -38.0, -44.0, -44.0" stroke="#8589f1" strokeType="INSIDE" strokeWidth="2.0" />
             <Label layoutX="58.0" layoutY="96.0" onMouseClicked="#cancelButtonOnAction" onMouseEntered="#onPolylineHover" onMouseExited="#onPolylineExit" prefHeight="30.0" prefWidth="30.0" />
 

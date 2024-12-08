@@ -81,7 +81,7 @@
         </AnchorPane>
     </top>
     <bottom>
-        <AnchorPane prefHeight="669.0" prefWidth="1340.0" stylesheets="@datepicker.css" BorderPane.alignment="CENTER" style="-fx-background-color: white;">
+        <AnchorPane prefHeight="669.0" prefWidth="1340.0" style="-fx-background-color: white;" stylesheets="@datepicker.css" BorderPane.alignment="CENTER">
             <children>
                 <Label layoutX="84.0" layoutY="72.0" text="Reserve Your Spot!" textFill="#8589f1">
                     <font>
@@ -90,13 +90,13 @@
                 </Label>
                 <DatePicker fx:id="datePicker" layoutX="795.0" layoutY="172.0" prefHeight="28.0" prefWidth="352.0" promptText="Select a date..." stylesheets="@datepicker.css" />
                 <VBox layoutX="183.0" layoutY="167.0" prefHeight="44.0" prefWidth="253.0" stylesheets="@style.css" xmlns:fx="http://javafx.com/fxml">
-                    <ComboBox fx:id="carComboBox" layoutX="84.0" layoutY="172.0" prefHeight="45.0" prefWidth="254.0" promptText="Your cars" style="-fx-background-color: #8589f1; -fx-background-radius: 10;">
+                    <ComboBox fx:id="carComboBox" layoutX="84.0" layoutY="180.0" prefHeight="45.0" prefWidth="254.0" promptText="Your cars" style="-fx-background-color: #8589f1; -fx-background-radius: 10;">
                     </ComboBox>
                 </VBox>
 
-                <Label layoutX="172.0" layoutY="138.0" text="Which car do you want to park?" textFill="#8589f1">
+                <Label layoutX="177.0" layoutY="127.0" text="Which car do you want to park?" textFill="#8589f1">
                     <font>
-                        <Font name="Tw Cen MT Bold" size="15.0" />
+                        <Font name="Tw Cen MT Bold" size="20.0" />
                     </font>
                 </Label>
 
@@ -216,16 +216,22 @@
                         </VBox>
                     </content>
                 </ScrollPane>
-                <RadioButton fx:id="regularRadioButton" layoutX="186.0" layoutY="280.0" mnemonicParsing="false" text="Regular" />
-                <RadioButton fx:id="vipRadioButton" layoutX="186.0" layoutY="319.0" mnemonicParsing="false" text="VIP " />
-                <Button fx:id="confirmButton" layoutX="587.0" layoutY="525.0" mnemonicParsing="false" onAction="#handleConfirmClick" style="-fx-background-color: #8589F1; -fx-background-radius: 8;" textAlignment="CENTER" textFill="WHITE" prefHeight="42.0" prefWidth="177.0"  text="Confirm" visible="false">
+                <RadioButton fx:id="regularRadioButton" layoutX="186.0" layoutY="280.0" mnemonicParsing="false" text="Regular">
+               <font>
+                  <Font name="Tw Cen MT" size="17.0" />
+               </font></RadioButton>
+                <RadioButton fx:id="vipRadioButton" layoutX="186.0" layoutY="319.0" mnemonicParsing="false" text="VIP ">
+               <font>
+                  <Font size="17.0" />
+               </font></RadioButton>
+                <Button fx:id="confirmButton" layoutX="587.0" layoutY="525.0" mnemonicParsing="false" onAction="#handleConfirmClick" prefHeight="42.0" prefWidth="177.0" style="-fx-background-color: #8589F1; -fx-background-radius: 8;" text="Confirm" textAlignment="CENTER" textFill="WHITE" visible="false">
                     <font>
                         <Font name="Tw Cen MT Condensed Extra Bold" size="20.0" />
                     </font>
                 </Button>
-                <Label layoutX="795.0" layoutY="138.0" text="When do you want to wheel in?" textFill="#8589f1">
+                <Label layoutX="795.0" layoutY="127.0" text="When do you want to wheel in?" textFill="#8589f1">
                     <font>
-                        <Font name="Tw Cen MT Bold" size="15.0" />
+                        <Font name="Tw Cen MT Bold" size="20.0" />
                     </font>
                 </Label>
                 <Button fx:id="searchButton" layoutX="1029.0" layoutY="228.0" onAction="#handleSearchClick" prefHeight="35.0" prefWidth="118.0" style="-fx-background-color: #8589f1; -fx-background-radius: 20;" text="Search" textFill="WHITE">
@@ -235,12 +241,12 @@
                 </Button>
                 <Label layoutX="172.0" layoutY="245.0" text="Where do you want to store your car?" textFill="#8589f1">
                     <font>
-                        <Font name="Tw Cen MT Bold" size="15.0" />
+                        <Font name="Tw Cen MT Bold" size="20.0" />
                     </font>
                 </Label>
                 <Label layoutX="262.0" layoutY="319.0" text="* give your car some special treatment :) *" textFill="#8589f1">
                     <font>
-                        <Font name="Tw Cen MT" size="15.0" />
+                        <Font name="Tw Cen MT" size="20.0" />
                     </font>
                 </Label>
                 <Polyline fx:id="cancelButton" fill="#80ff0000" layoutX="110.0" layoutY="123.0" points="-44.0, -21.0, -61.0, -31.0, -51.0, -38.0, -44.0, -44.0" stroke="#8589f1" strokeType="INSIDE" strokeWidth="2.0" />
